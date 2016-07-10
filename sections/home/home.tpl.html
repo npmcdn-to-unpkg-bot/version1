@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" style=" height: 150px; width:100%;background-color: #808080;">Bande PUB</div>
+    </div>
+    <div class="row" style="padding-top: 5px;">
+        <div class="col-md-12">
+            <div class="col-md-2 metierPadding" ng-repeat="boulot in home.btnMetier"><button  type="button" class="btn btn-default metierBtn"><b>{{boulot.libelle}}<br><span style="font-size: 10px">{{boulot.sub_libelle}}</span></b></button></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="col-md-3" style="margin-bottom: 5px; margin-top: 5px;" ng-repeat="metier in home.metier">
+                <div class="tileImg" ng-click="home.fnImgClick(metier.id)">
+                    <img style="width: 200px; height: 200px" src="{{metier.src}}">
+                    <div style="background-color: purple;color: white"><b>{{metier.description}}</b></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div style="border: groove;background-color: #e1e3e4">
+                <ul >
+                    <li ng-repeat="instruction in home.instructions">{{instruction.description}}</li>
+                </ul>
+            </div>
+            <!--div style="margin-top: 15px; padding-top: 10px">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/m6fDf8iqiL4" frameborder="0" allowfullscreen></iframe>
+            </div-->
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
