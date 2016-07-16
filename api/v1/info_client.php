@@ -6,6 +6,27 @@
  * Time: 22:23
  */
 
+/*
+ CREATE TABLE `info_client` (
+  `id_client` int(10) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `surname` varchar(100) NOT NULL,
+  `id_user` int(10) NOT NULL,
+  `address1` varchar(500) NOT NULL,
+  `address2` varchar(500) NOT NULL,
+  `dept` varchar(100) NOT NULL,
+  `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+*/
+
+// Indexes for table `info_client`
+
+/* ALTER TABLE `info_client`
+  ADD PRIMARY KEY (`id_client`,`id_user`);
+*/
+
+/**************************************/
 class info_client {
 //**** Variables declarations ****
     private $_id_client = null;
