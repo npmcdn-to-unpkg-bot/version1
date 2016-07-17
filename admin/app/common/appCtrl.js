@@ -119,7 +119,12 @@ function ($rootScope, $scope, $state, $location, Flash,appSettings) {
         {
             title: "Compte",
             icon: "user",
-            state: "skills"
+            state: "account"
+        },
+        {
+            title: "Model",
+            icon : "cubes",
+            state: "model"
         },
         {
             title: "Skills",

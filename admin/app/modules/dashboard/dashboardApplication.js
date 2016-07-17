@@ -35,6 +35,16 @@ dashboard.config(["$stateProvider", function ($stateProvider) {
         }
     });
 
+    $stateProvider.state('app.model', {
+        url: '/model',
+        templateUrl: 'app/modules/dashboard/views/model.html',
+        controller: 'modelController',
+        controllerAs: 'vm',
+        data: {
+            pageTitle: 'Model'
+        }
+    });
+
     //skills page state
     $stateProvider.state('app.skills', {
         url: '/skills',

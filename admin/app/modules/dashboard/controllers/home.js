@@ -17,25 +17,25 @@ function ($rootScope, $scope, $state, $location, dashboardService, Flash) {
     
     vm.home.mainData = [
         {
-            title: "Projects",
+            title: "En Commande",
             value: "30+",
             theme: "aqua",
             icon: "puzzle-piece"
         },
         {
-            title: "Designs",
+            title: "Maquette en cours",
             value: "250+",
             theme: "red",
             icon: "paint-brush"
         },
         {
-            title: "Awards",
+            title: "Attente de clients",
             value: "50+",
             theme: "green",
             icon: "trophy"
         },
         {
-            title: "Cups of Beer",
+            title: "Commande confirmé",
             value: "0",
             theme: "yellow",
             icon: "glass"
@@ -219,7 +219,7 @@ function ($rootScope, $scope, $state, $location, dashboardService, Flash) {
         slideSpeed: 300,
         paginationSpeed: 400,
         singleItem: true,
-        autoPlay: 5000, //Set AutoPlay to 3 seconds
+        autoPlay: 5000 //Set AutoPlay to 3 seconds
     });
 }]);
 
