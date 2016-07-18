@@ -25,24 +25,48 @@
     <!-- endbuild -->
 </head>
 <body data-ng-app="myApp" ng-controller="mainController">
+
+
+<div class="container">
+
+
 <div class="row" style="margin-right: 0px">
-    <div class="col-md-4"><img style="width: 90%; height: 134px;" src="assets/img/logo%20exakom.png"></div>
-    <div class="col-md-2">
-        <div class="col-md-12" style="padding-top: 20%;text-align: center">Lundi au Vendredi</div>
-        <div class="col-md-12" style="text-align: center"> 7h30 à 17h00</div>
-        <div class="col-md-12" style="text-align: center">Non-Stop</div>
+
+
+    <div class="col-md-6">
+
+        <div class='block-image'><img src="assets/img/logo%20exakom.png"></div>
+
+
+
     </div>
-    <div class="col-md-2">
-        <span class="col-md-12"  style="padding-top: 10%">Besoin d'aide?<img style="width: 39%" src="assets/img/teleagent.png"></span>
-        <div class="col-md-12">Vous voulez être rappelé</div>
-    </div>
-    <div class="col-md-2">
-        <div class="col-md-12" style="padding-top: 20%">Tél : 00 00 00 00 00</div>
+
+
+
+   
+ 
+
+    <div class="col-md-6">
+<div class='block-tel'>
         <div class="col-md-12">Nous contacter par email</div>
-        <div class="col-md-12"><img style="width: 100%" src="assets/img/numero_verte.png"></div>
+        <div class="col-md-12">Tél : 00 00 00 00 00</div>
+        
+        <div class="col-md-12"><img  src="assets/img/numero_verte.png"></div>
     </div>
-    <div class="col-md-2"><div style="padding-top: 10%"><img style="width: 100%" src="assets/img/recep_promotions.png"></div></div>
+ </div>
+
+
+  
 </div>
+</div>
+
+
+
+
+
+
+
+
 <div id="myModal" class="modal fade" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -93,7 +117,12 @@
         </div>
     </div>
 </div>
-<nav class="navbar navbar-default" style="background-color: darkblue">
+
+
+
+<div class="container">
+
+<nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -135,14 +164,15 @@
                     </ul>
                 </li>
             </ul>
-            <form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Recherche">
-                </div>
-                <span class="glyphicon glyphicon-search"  style="color: white" aria-hidden="true"></span>
-            </form>
+
+
+            
+
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#myModal" data-toggle="modal" style="color: white"><button class="btn-primary btn-sm">Identifiez-vous</button></a></li>
+                <li><a href="#myModal" data-toggle="modal" style="color: white">
+
+<span class="glyphicon glyphicon-user"></span>
+                    <!-- /.navbar-collapse <button class="btn-primary btn-sm">Identifiez-vous</button>--></a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" style="color: white" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">FR <span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -154,15 +184,64 @@
                     </ul>
                 </li>
             </ul>
+
+<form class="navbar-form navbar-right" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Recherche">
+                </div>
+                <span class="glyphicon glyphicon-search"  aria-hidden="true"></span>
+            </form>
+
+
+
+
+
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+</div>
+
+
+
+
+
+
+
 
 <section id="main">
     <div class="container">
         <ng-view></ng-view>
     </div>
 </section>
+
+
+
+
+<footer>
+<div class="container">
+        <div class="process">
+
+
+
+        </div>
+
+
+    </div>
+
+    <div class="container">
+        <div class="signature">
+
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+    </footer>
 
 <!-- build:assets assets.min.js -->
 <!-- ASSETS -->

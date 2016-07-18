@@ -4,19 +4,55 @@ Page Description: About Me page
 Date: 05 Jan 2016
 -->
 
-<section class="content-header">
-    <h1>
-        About Me
-    </h1>
-    <ol class="breadcrumb">
+<!--section class="content-header">
+    <!--ol class="breadcrumb">
         <li><a><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active">About Me</li>
     </ol>
-</section>
+</section-->
 <!-- Main content -->
 <section class="content">
     <div class="row">
-        <h1>maquette PAGE</h1>
+        <div class="col-md-12">
+            <button class="btn btn-large btn-success">Nouveau categorie</button>
+            <button class="btn btn-large btn-success">Nouvelle Model</button>
+            <button class="btn btn-large btn-success">Ajout Image/s</button>
+        </div>
+        <div class="col-md-12">
+            <div id="main-container">
+                <h3 id="clothing">Maquette Customizé</h3>
+                <div id="model" class="fpd-container fpd-shadow-2 fpd-topbar fpd-tabs fpd-tabs-side fpd-top-actions-centered fpd-bottom-actions-centered fpd-views-inside-left">
+                    <div data-ng-repeat="product in fiche.productList" class="fpd-product" title="{{product.title}}" data-thumbnail="{{product.thumbnail_src}}">
+                        <img ng-repeat="source in  product.img_src" src="{{source.src}}"   title="Base" data-parameters='{"left": 325, "top": 329, "colors": "#d59211", "price": 20}'/>
+                    </div>
+                    <div class="fpd-design">
+                        <div ng-repeat="design in fiche.productsDesign" class="fpd-category" title="{{design.title}}">
+                            <img ng-repeat="image in design.imgsrc" src="{{image.src}}"  title="{{image.title}}" data-parameters='{"zChangeable": true, "left": 215, "top": 200, "colors": "#000000", "removable": true, "draggable": true, "rotatable": true, "resizable": true, "price": 10, "boundingBox": "Base", "autoCenter": true}' />
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="fpd-clearfix" style="margin-top: 30px;">
+                    <div class="api-buttons fpd-container fpd-left">
+                        <a href="#" id="print-button" class="fpd-btn">Print</a>
+                        <a href="#" id="image-button" class="fpd-btn">Create Image</a>
+                        <a href="#" id="checkout-button" class="fpd-btn">Checkout</a>
+                        <a href="#" id="recreation-button" class="fpd-btn">Recreate product</a>
+                    </div>
+                    <div class="fpd-right">
+                        <span class="price badge badge-inverse"><span id="thsirt-price"></span> $</span>
+                    </div>
+                </div>
+
+                <p class="fpd-container">
+                    Only working on a webserver:<br />
+                    <span class="fpd-btn" id="save-image-php">Save image with php</span>
+                    <span class="fpd-btn" id="send-image-mail-php">Send image to mail</span>
+                </p>
+
+            </div>
+        </div>
     </div><!-- /.row -->
 </section><!-- /.content -->
 

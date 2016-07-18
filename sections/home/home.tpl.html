@@ -1,7 +1,81 @@
-<div class="container">
+<div class="row">
     <div class="row">
         <div class="col-md-12" style=" height: 150px; width:100%;background-color: #808080;">Bande PUB</div>
     </div>
+
+
+
+
+                        <div class="row no-gutter panel">
+
+                        <div class="col-md-4">
+
+                               <div class="btn1">
+
+                                                    
+                                                     <span class="icon"><span class="glyphicon glyphicon-time"></span></span>
+                                                    <span class="txt">Lundi au Vendredi <br>7h30 à 17h00 Non-Stop</span>
+
+
+
+                                  </div>
+
+
+
+                        </div>
+
+                         <div class="col-md-4">
+
+
+                                  <div class="btn2">
+
+                                    <span class="icon"><span class="glyphicon glyphicon-phone"></span></span>
+                                    <span class="txt">Besoin d'aide? <br>Vous voulez être rappelé ?</span>
+
+
+
+                                  </div>
+
+
+                        </div>
+
+
+                         <div class="col-md-4">
+
+                                    <div class="btn3">
+
+                                   <span class="icon"><span class="glyphicon glyphicon-gift"></span></span>
+                                    <span class="txt">Recevoir des <br>promotions et cadeaux</span>
+
+
+
+                                  </div>
+
+
+
+
+                         </div>
+                         </div>
+                        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="row" style="padding-top: 5px;">
         <div class="col-md-12">
             <div class="col-md-2 metierPadding" ng-repeat="boulot in home.btnMetier"><button  type="button" class="btn btn-default metierBtn"><b>{{boulot.libelle}}<br><span style="font-size: 10px">{{boulot.sub_libelle}}</span></b></button></div>
@@ -12,12 +86,16 @@
             <div class="col-md-3" style="margin-bottom: 5px; margin-top: 5px;" ng-repeat="metier in home.metier">
                 <div class="tileImg" ng-click="home.fnImgClick(metier.id)">
                     <img style="width: 200px; height: 200px" src="{{metier.src}}">
-                    <div style="background-color: purple;color: white"><b>{{metier.description}}</b></div>
+                    <span><p>{{metier.description}}</p></span>
                 </div>
             </div>
         </div>
+
+
+
+
         <div class="col-md-3">
-            <div style="border: groove;background-color: #e1e3e4">
+            <div class="encart-droite">
                 <ul >
                     <li ng-repeat="instruction in home.instructions">{{instruction.description}}</li>
                 </ul>

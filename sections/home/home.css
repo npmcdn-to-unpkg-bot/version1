@@ -111,7 +111,227 @@
 }
 
 .tileImg {
-    box-shadow: 0 4px 8px 0 rgba(184, 0, 166, 1), 0 6px 20px 0 rgba(184, 0, 166, 0.19);
+    border:2px solid #eaeaea;
     text-align: center;
-    cursor: pointer
+    cursor: pointer;
+    border-radius: 0.4rem;
+    width:207px;
 }
+
+.tileImg p.ng-binding
+{
+
+    color:#666;
+    padding: 1rem 0;
+    text-transform:uppercase;
+    background: #eaeaea;
+    margin:0;
+    transition: all 0.3s ease 0s;
+
+
+}
+
+ .tileImg p.ng-binding:hover
+    {
+
+background: #c9e89d;
+
+        
+    }
+
+
+    @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+
+
+
+
+
+body
+
+{
+
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+
+
+.block-image img {
+
+    padding: 1rem 0 0;
+    
+    width:25rem;
+}
+
+
+
+
+.block-tel {
+
+    margin: 2rem 0 0;
+    
+    text-align:right;
+}
+
+.block-tel img {
+    
+    width:15rem;
+}
+
+
+
+.navbar
+
+{
+
+background-color: #E5E3E3;
+
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #888!important;
+        line-height: 4rem;
+        transition: all 0.3s ease 0s;
+
+
+        
+}
+
+.navbar-default .navbar-nav > li > a:hover{
+
+            color:#8CC63F!important;
+        }
+
+
+.navbar-form {
+    
+    padding: 10px 15px!important;
+}
+
+
+.glyphicon {
+    display: inline-block;
+    font-family: "Glyphicons Halflings";
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: normal;
+    position: relative;
+    top: 5px;
+}
+
+.glyphicon.glyphicon-search {
+    color: #888;
+    font-size: 1.6rem;
+    left: -34px;
+    position: relative;
+    top: 4px;
+}
+
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+
+
+.btn1
+{
+
+background-color: #D893E3;
+margin:0 auto;
+padding: 2.5rem;
+border-radius: 0.4rem 0 0 0.4rem;
+
+
+}
+
+.btn2
+{
+
+background-color: #C67AD2;
+margin:0 auto;
+padding: 2.5rem;
+
+}
+
+.btn3
+{
+
+background-color: #B667C0;
+margin:0 auto;
+padding: 2.5rem;
+border-radius: 0 0.4rem 0.4rem 0;
+}
+
+
+span.icon {
+    padding: 1.5rem;
+    color:#E7BAEF;
+    vertical-align: middle;
+    border:1px solid #E7BAEF;
+    border-radius: 50%;
+}
+
+span.txt {
+    float:right;
+    color:#E7BAEF;
+    font-size: 1.7rem;
+    margin-top: -10px
+}
+
+
+.panel
+{
+
+    margin:3rem 0;
+}
+
+
+.encart-droite
+{
+
+background-color:#eaeaea;
+border-radius: 0.4rem;
+padding:2rem 2rem 2rem 0;
+}
+
+.encart-droite ul li
+{
+
+margin:0;
+
+margin-bottom:0.9rem;
+
+
+}
+
+
+footer {
+
+
+    margin-top:3rem;
+}
+
+.process
+
+{
+
+border:2px solid #eaeaea;
+height:20rem;
+border-radius: 0.4rem;
+
+}
+
+.signature
+
+{
+
+    margin:2rem 0;
+
+background:#C9E89D;
+height:6rem;
+border-radius: 0.4rem;
+
+}
+
