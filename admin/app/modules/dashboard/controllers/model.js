@@ -3,6 +3,7 @@ dashboard.controller("modelController", ['$rootScope', '$scope', '$state', '$loc
         var vm = this;
         console.log("model controller");
 
+
         vm.imgList = [
             {id:1,title:"Cheque cadeau",src:"assets/img/cheque_cadeau.png"},
             {id:2,title:"Carte Message",src:"assets/img/carte_message.png"},
