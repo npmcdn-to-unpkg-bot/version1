@@ -75,10 +75,10 @@ class commission_markets {
 
     //***** fonction de modification/cr�ation *****
     public function save() {
-        $this->_date_modified = date('Y/m/d H:i:s', time());
+       /* $this->_date_modified = date('Y/m/d H:i:s', time());
         if ($this->_date_created == null) {
             $this->_date_created = date('Y/m/d H:i:s', time());
-        }
+        }*/
         if ($this->_id_comm > 0) {
             $requete = "UPDATE COMMISION_MARKETS SET ID_MARKETER='" . ($this->_id_marketer) . "'";
             $requete .= ",ID_ORDER='" . $this->_id_order . "',";
