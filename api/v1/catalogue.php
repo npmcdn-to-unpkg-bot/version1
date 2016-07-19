@@ -202,4 +202,13 @@ class catalogue {
         }
         return $rows;
     }
+
+    public function findByPrimaryKey($key) { // Recherche d'une adresse par id
+        $requete = self::$SELECT . " WHERE ID_CATALOGUE=" . $key;
+        $rs = $this->conn->query($requete);
+        if ($rs->EOF) {
+            return null;
+        }
+        return $this->mapSqlToObject($rs);
+    }
 } 
