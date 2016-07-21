@@ -6,6 +6,34 @@
  * Time: 22:50
  */
 
+/*
+ * --
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `uid` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `phone` int(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `address` varchar(500) NOT NULL,
+  `city` varchar(500) NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`uid`);
+
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT;
+ */
+
 class users {
     //**** Variables declarations ****
     private $_uid = null;

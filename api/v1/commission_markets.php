@@ -6,6 +6,27 @@
  * Time: 22:21
  */
 
+/*
+ * --
+-- Table structure for table `commision_markets`
+--
+
+CREATE TABLE `commision_markets` (
+  `id_comm` int(10) NOT NULL,
+  `id_marketer` int(10) NOT NULL,
+  `id_order` int(10) NOT NULL,
+  `percentage` float NOT NULL,
+  `amount` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- AUTO_INCREMENT for table `commision_markets`
+--
+ALTER TABLE `commision_markets`
+  MODIFY `id_comm` int(10) NOT NULL AUTO_INCREMENT;
+--
+ */
+
 class commission_markets {
     //**** Variables declarations ****
     private $_id_comm = null;

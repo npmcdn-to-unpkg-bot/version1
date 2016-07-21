@@ -5,6 +5,18 @@
  * Date: 13/07/2016
  * Time: 22:22
  */
+/*-- Table structure for table `department`
+--
+
+CREATE TABLE `department` (
+`id_dept` int(10) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `department`
+  MODIFY `id_dept` int(10) NOT NULL AUTO_INCREMENT;
+*/
 
 class department {
     //**** Variables declarations ****
@@ -86,9 +98,9 @@ class department {
     //***** Fonction de passege sql->objet *****
     private function mapSqlToObject($rs) {
         $dept = new department();
-        $dept->_uid = $rs->fields["ID_DEPT"];
+        $dept->_id_dept= $rs->fields["ID_DEPT"];
         $dept->_name = $rs->fields["NAME"];
-        $dept->_email = $rs->fields["DESCRIPTION"];
+        $dept->_description = $rs->fields["DESCRIPTION"];
         return $dept;
     }
 
