@@ -109,7 +109,7 @@ class info_marketers {
             $requete .= ",NAME='" . $this->_name . "',";
             $requete .= ",ADDRESS1='" . $this->_address1 . "',";
             $requete .= ",ADDRESS2='" . $this->_address2 . "',";
-            $requete .= ",ASSIGNED_DEPT='" . $this->_assigned_dept . "',";
+            $requete .= ",ASSIGNED_DEPT='" . $this->_assigned_dept . "'";
             $requete .= " WHERE ID_MARKETERS=" . $this->_id_marketers;
 
         } else {
@@ -119,14 +119,14 @@ class info_marketers {
             $requete .= "NAME,";
             $requete .= "ADDRESS1,";
             $requete .= "ADDRESS2,";
-            $requete .= "ASSIGNED_DEPT,";
+            $requete .= "ASSIGNED_DEPT";
             $requete .= ") VALUES (";
-            $requete .= "'" . $this->_id_marketers . "')";
-            $requete .= "'" . $this->_surname . "')";
+            $requete .= "'" . $this->_id_marketers . "',";
+            $requete .= "'" . $this->_surname . "',";
             $requete .= "'" . $this->_name . "',";
             $requete .= "'" . $this->_address1 . "',";
             $requete .= "'" . $this->_address2 . "',";
-            $requete .= "'" . $this->_assigned_dept . "',";
+            $requete .= "'" . $this->_assigned_dept . "')";
         }
 
         $r = $this->conn->query($requete) or die($this->conn->error.__LINE__);

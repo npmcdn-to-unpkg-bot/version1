@@ -8,10 +8,10 @@
 
 /*
  * --
--- Table structure for table `commision_markets`
+-- Table structure for table `commission_markets`
 --
 
-CREATE TABLE `commision_markets` (
+CREATE TABLE `commission_markets` (
   `id_comm` int(10) NOT NULL,
   `id_marketer` int(10) NOT NULL,
   `id_order` int(10) NOT NULL,
@@ -20,9 +20,9 @@ CREATE TABLE `commision_markets` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- AUTO_INCREMENT for table `commision_markets`
+-- AUTO_INCREMENT for table `commission_markets`
 --
-ALTER TABLE `commision_markets`
+ALTER TABLE `commission_markets`
   MODIFY `id_comm` int(10) NOT NULL AUTO_INCREMENT;
 --
  */
@@ -43,6 +43,7 @@ class commission_markets {
         $this->conn = $db->connect();
     }
 
+    private static $SELECT="SELECT * FROM COMMISSION_MARKETS";
     //**** Setters *****
     public function setId_comm($id_comm) {
         $this->_id_comm= $id_comm;
@@ -89,7 +90,7 @@ class commission_markets {
     }
 
     public function delete($id_comm) {
-        $requete = "DELETE FROM COMMISION_MARKETS WHERE id_comm=" . $id_comm ;
+        $requete = "DELETE FROM COMMISSION_MARKETS WHERE id_comm=" . $id_comm ;
         $r = $this->conn->query($requete) or die($this->conn->error.__LINE__);
     }
 
@@ -101,25 +102,25 @@ class commission_markets {
             $this->_date_created = date('Y/m/d H:i:s', time());
         }*/
         if ($this->_id_comm > 0) {
-            $requete = "UPDATE COMMISION_MARKETS SET ID_MARKETER='" . ($this->_id_marketer) . "'";
+            $requete = "UPDATE COMMISSION_MARKETS SET ID_MARKETER='" . ($this->_id_marketer) . "'";
             $requete .= ",ID_ORDER='" . $this->_id_order . "',";
-            $requete .= ",PERCENTAGE='" . $this->_percentage . "'";
+            $requete .= ",PERCENTAGE='" . $this->_percentage . "',";
             $requete .= ",AMOUNT='" . $this->_amount . "'";
             $requete .= " WHERE ID_COMM=" . $this->_id_comm;
 
         } else {
-            $requete = "INSERT INTO COMMISION_MARKETS (";
+            $requete = "INSERT INTO COMMISSION_MARKETS (";
             $requete .= "ID_COMM,";
             $requete .= "ID_MARKETER,";
             $requete .= "ID_ORDER,";
             $requete .= "PERCENTAGE,";
-            $requete .= "AMOUNT,";
+            $requete .= "AMOUNT";
             $requete .= ") VALUES (";
-            $requete .= "'" . $this->_id_comm . "')";
-            $requete .= "'" . $this->_id_marketer . "')";
+            $requete .= "'" . $this->_id_comm . "',";
+            $requete .= "'" . $this->_id_marketer . "',";
             $requete .= "'" . $this->_id_order . "',";
             $requete .= "'" . $this->_percentage . "',";
-            $requete .= "'" . $this->_amount . ",";
+            $requete .= "'" . $this->_amount . "')";
         }
 
         $r = $this->conn->query($requete) or die($this->conn->error.__LINE__);

@@ -75,7 +75,7 @@ class department {
          }*/
         if ($this->_id_dept > 0) {
             $requete = "UPDATE DEPARTMENT SET NAME='" . ($this->_name) . "'";
-            $requete .= ",DESCRIPTION='" . $this->_description . "',";
+            $requete .= ",DESCRIPTION='" . $this->_description . "'";
             $requete .= " WHERE ID_DEPT=" . $this->_id_dept;
 
         } else {
@@ -84,9 +84,9 @@ class department {
             $requete .= "NAME,";
             $requete .= "DESCRIPTION,";
             $requete .= ") VALUES (";
-            $requete .= "'" . $this->_id_dept . "')";
-            $requete .= "'" . $this->_name . "')";
-            $requete .= "'" . $this->_description . "',";
+            $requete .= "'" . $this->_id_dept . "',";
+            $requete .= "'" . $this->_name . "',";
+            $requete .= "'" . $this->_description . "')";
         }
 
         $r = $this->conn->query($requete) or die($this->conn->error.__LINE__);

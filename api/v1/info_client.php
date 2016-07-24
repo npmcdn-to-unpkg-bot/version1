@@ -147,13 +147,13 @@ class info_client {
         }
         if ($this->_id_client > 0) {
             $requete = "UPDATE INFO_CLIENT SET SURNAME='" . ($this->_surname) . "'";
-            $requete .= ",NAME='" . $this->_name . "'";
-            $requete .= ",ID_USER=" . $this->_id_user;
+            $requete .= ",NAME='" . $this->_name . "',";
+            $requete .= ",ID_USER=" . $this->_id_user . "',";
             $requete .= ",ADDRESS1='" . $this->_address1 . "',";
-            $requete .= ",ADDRESS2='" . $this->_address2 . "'";
-            $requete .= ",DEPT='" . $this->_dept . "'";
-            $requete .= ",DATE_CREATED='" . $this->_date_created . "'";
-            $requete .= ",DATE_MODIFIED='" . $this->_date_modified . "'";
+            $requete .= ",ADDRESS2='" . $this->_address2 . "',";
+            $requete .= ",DEPT='" . $this->_dept . "',";
+            $requete .= ",DATE_CREATED='" . $this->_date_created . "',";
+            $requete .= ",DATE_MODIFIED='" . $this->_date_modified . "',";
             $requete .= " WHERE ID_CLIENT=" . $this->_id_client;
 
         } else {
@@ -162,9 +162,9 @@ class info_client {
             $requete .= "NAME,";
             $requete .= "ID_USER,";
             $requete .= "ADDRESS1,";
-            $requete .= "ADDRESS2";
-            $requete .= "DEPT";
-            $requete .= "DATE_CREATED";
+            $requete .= "ADDRESS2,";
+            $requete .= "DEPT,";
+            $requete .= "DATE_CREATED,";
             $requete .= "DATE_MODIFIED";
             $requete .= ") VALUES (";
             $requete .= "'" . $this->_surname . "',";

@@ -138,11 +138,11 @@ class users {
         if ($this->_uid > 0) {
             $requete = "UPDATE USERS SET NAME='" . ($this->_name) . "'";
             $requete .= ",EMAIL='" . $this->_email . "',";
-            $requete .= ",PHONE='" . $this->_phone . "'";
-            $requete .= ",PASSWORD='" . $this->_password . "'";
-            $requete .= ",ADDRESS='" . $this->_address . "'";
-            $requete .= ",CITY='" . $this->_city . "'";
-            $requete .= ",CREATED='" . $this->_created . "'";
+            $requete .= ",PHONE='" . $this->_phone . "',";
+            $requete .= ",PASSWORD='" . $this->_password . "',";
+            $requete .= ",ADDRESS='" . $this->_address . "',";
+            $requete .= ",CITY='" . $this->_city . "',";
+            $requete .= ",CREATED='" . $this->_created . "',";
             $requete .= " WHERE UID=" . $this->_uid;
 
         } else {
@@ -154,16 +154,16 @@ class users {
             $requete .= "PASSWORD,";
             $requete .= "ADDRESS,";
             $requete .= "CITY,";
-            $requete .= "CREATED,";
+            $requete .= "CREATED";
             $requete .= ") VALUES (";
-            $requete .= "'" . $this->_uid . "')";
-            $requete .= "'" . $this->_name . "')";
+            $requete .= "'" . $this->_uid . "',";
+            $requete .= "'" . $this->_name . "',";
             $requete .= "'" . $this->_email . "',";
             $requete .= "'" . $this->_phone . "',";
-            $requete .= "'" . $this->_password . ",";
-            $requete .= "'" . $this->_address . ",";
-            $requete .= "'" . $this->_city . ",";
-            $requete .= "'" . $this->_created . ",";
+            $requete .= "'" . $this->_password . "',";
+            $requete .= "'" . $this->_address . "',";
+            $requete .= "'" . $this->_city . "',";
+            $requete .= "'" . $this->_created . "')";
         }
 
         $r = $this->conn->query($requete) or die($this->conn->error.__LINE__);

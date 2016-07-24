@@ -128,14 +128,14 @@ class orders {
         if ($this->_id_order > 0) {
             $requete = "UPDATE ORDERS SET DATE_CREATED='" . ($this->_date_created) . "'";
             $requete .= ",DATE_MODIFIED='" . $this->_date_modified . "',";
-            $requete .= ",ID_CLIENT='" . $this->_id_client . "'";
-            $requete .= ",ID_MARKETER='" . $this->_id_marketer . "'";
-            $requete .= ",ID_CATALOGUE='" . $this->_id_catalogue . "'";
-            $requete .= ",QTY='" . $this->_qty . "'";
-            $requete .= ",PRICE='" . $this->_price . "'";
-            $requete .= ",DELIVERY_DATE='" . $this->_delivery_date . "'";
-            $requete .= ",CREATED_BY='" . $this->_created_by . "'";
-            $requete .= ",MODIFIED_BY='" . $this->_modified_by . "'";
+            $requete .= ",ID_CLIENT='" . $this->_id_client . "',";
+            $requete .= ",ID_MARKETER='" . $this->_id_marketer . "',";
+            $requete .= ",ID_CATALOGUE='" . $this->_id_catalogue . "',";
+            $requete .= ",QTY='" . $this->_qty . "',";
+            $requete .= ",PRICE='" . $this->_price . "',";
+            $requete .= ",DELIVERY_DATE='" . $this->_delivery_date . "',";
+            $requete .= ",CREATED_BY='" . $this->_created_by . "',";
+            $requete .= ",MODIFIED_BY='" . $this->_modified_by . "',";
             $requete .= ",DISCOUNT='" . $this->_discount . "'";
             $requete .= " WHERE ID_ORDER=" . $this->_id_order;
 
@@ -152,20 +152,20 @@ class orders {
             $requete .= "DELIVERY_DATE,";
             $requete .= "CREATED_BY,";
             $requete .= "MODIFIED_BY,";
-            $requete .= "DISCOUNT,";
+            $requete .= "DISCOUNT";
             $requete .= ") VALUES (";
-            $requete .= "'" . $this->_id_order . "')";
-            $requete .= "'" . $this->_date_created . "')";
+            $requete .= "'" . $this->_id_order . "',";
+            $requete .= "'" . $this->_date_created . "',";
             $requete .= "'" . $this->_date_modified . "',";
             $requete .= "'" . $this->_id_client . "',";
             $requete .= "'" . $this->_id_marketer . ",";
-            $requete .= "'" . $this->_id_catalogue . ",";
-            $requete .= "'" . $this->_qty . ",";
-            $requete .= "'" . $this->_price . ",";
-            $requete .= "'" . $this->_delivery_date . ",";
-            $requete .= "'" . $this->_created_by . ",";
-            $requete .= "'" . $this->_modified_by . ",";
-            $requete .= "'" . $this->_discount . ",";
+            $requete .= "'" . $this->_id_catalogue . "',";
+            $requete .= "'" . $this->_qty . "',";
+            $requete .= "'" . $this->_price . "',";
+            $requete .= "'" . $this->_delivery_date . "',";
+            $requete .= "'" . $this->_created_by . "',";
+            $requete .= "'" . $this->_modified_by . "',";
+            $requete .= "'" . $this->_discount . "')";
         }
 
         $r = $this->conn->query($requete) or die($this->conn->error.__LINE__);

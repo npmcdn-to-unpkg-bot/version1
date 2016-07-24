@@ -138,12 +138,12 @@ class catalogue {
         }
         if ($this->_id_client > 0) {
             $requete = "UPDATE CATALOGUE SET ID_CLIENT='" . ($this->_id_client) . "'";
-            $requete .= ",ID_MARKETER='" . $this->_id_marketer . "'";
+            $requete .= ",ID_MARKETER='" . $this->_id_marketer . "',";
             $requete .= ",LINK='" . $this->_link . "',";
-            $requete .= ",DESCRIPTION='" . $this->_description . "'";
-            $requete .= ",DATE_CREATED='" . $this->_date_created . "'";
-            $requete .= ",DATE_MODIFIED='" . $this->_date_modified . "'";
-            $requete .= ",CREATED_BY='" . $this->_created_by . "'";
+            $requete .= ",DESCRIPTION='" . $this->_description . "',";
+            $requete .= ",DATE_CREATED='" . $this->_date_created . "',";
+            $requete .= ",DATE_MODIFIED='" . $this->_date_modified . "',";
+            $requete .= ",CREATED_BY='" . $this->_created_by . "',";
             $requete .= ",MODIFIED_BY='" . $this->_modified_by . "'";
             $requete .= " WHERE ID_CATALOGUE=" . $this->_id_catalogue;
 
@@ -153,13 +153,13 @@ class catalogue {
             $requete .= "ID_CLIENT,";
             $requete .= "ID_MARKETER,";
             $requete .= "LINK,";
-            $requete .= "DESCRIPTION";
-            $requete .= "DATE_CREATED";
-            $requete .= "DATE_MODIFIED";
-            $requete .= "CREATED_BY";
+            $requete .= "DESCRIPTION,";
+            $requete .= "DATE_CREATED,";
+            $requete .= "DATE_MODIFIED,";
+            $requete .= "CREATED_BY,";
             $requete .= "MODIFIED_BY";
             $requete .= ") VALUES (";
-            $requete .= "'" . $this->_id_catalogue . "')";
+            $requete .= "'" . $this->_id_catalogue . "',";
             $requete .= "'" . $this->_id_client . "',";
             $requete .= "'" . $this->_id_marketer . "',";
             $requete .= "'" . $this->_link . ",";
