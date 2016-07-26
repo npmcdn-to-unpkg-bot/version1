@@ -136,7 +136,7 @@ class catalogue {
         if ($this->_date_created == null) {
             $this->_date_created = date('Y/m/d H:i:s', time());
         }
-        if ($this->_id_client > 0) {
+        if ($this->_id_catalogue > 0) {
             $requete = "UPDATE CATALOGUE SET ID_CLIENT='" . ($this->_id_client) . "'";
             $requete .= ",ID_MARKETER='" . $this->_id_marketer . "',";
             $requete .= ",LINK='" . $this->_link . "',";
