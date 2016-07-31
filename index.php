@@ -9,6 +9,7 @@
     <!-- build:css assets/css/styles.css -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="sections/home/home.css"/>
+    
     <link rel="stylesheet" href="sections/fiche/fiche.css"/>
     <!-- The CSS for the plugin itself - required -->
     <link rel="stylesheet" type="text/css" href="css/FancyProductDesigner-all.min.css" />
@@ -26,47 +27,20 @@
 </head>
 <body data-ng-app="myApp" ng-controller="mainController">
 
-
 <div class="container">
-
-
-<div class="row" style="margin-right: 0px">
-
-
-    <div class="col-md-6">
-
-        <div class='block-image'><img src="assets/img/logo%20exakom.png"></div>
-
-
-
+    <div class="row" style="margin-right: 0px">
+        <div class="col-md-6 col-sm-6">
+            <div class='block-image'><img src="assets/img/logo%20exakom.png"></div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+            <div class='block-tel'>
+                <div class="col-md-12">Nous contacter par email</div>
+                <div class="col-md-12">Tél : 00 00 00 00 00</div>
+                <div class="col-md-12"><img  src="assets/img/numero_verte.png"></div>
+            </div>
+        </div>
     </div>
-
-
-
-   
- 
-
-    <div class="col-md-6">
-<div class='block-tel'>
-        <div class="col-md-12">Nous contacter par email</div>
-        <div class="col-md-12">Tél : 00 00 00 00 00</div>
-        
-        <div class="col-md-12"><img  src="assets/img/numero_verte.png"></div>
-    </div>
- </div>
-
-
-  
 </div>
-</div>
-
-
-
-
-
-
-
-
 <div id="myModal" class="modal fade" data-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -112,17 +86,15 @@
                     <i class="ace-icon fa fa-key"></i>
                     Login
                 </button>
+                <button type="button" class="btn btn-danger pull-left" ng-click="logout()">LOGOUT</button>
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-
-
 <div class="container">
-
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" ng-show="showMenu">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -133,7 +105,6 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
@@ -164,11 +135,7 @@
                     </ul>
                 </li>
             </ul>
-
-
-            
-
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right  ">
                 <li><a href="#myModal" data-toggle="modal" style="color: white">
 
 <span class="glyphicon glyphicon-user"></span>
@@ -184,63 +151,37 @@
                     </ul>
                 </li>
             </ul>
-
-<form class="navbar-form navbar-right" role="search">
-                <div class="form-group">
+<form class="navbar-form navbar-right visible-lg" role="search">
+                <div class="form-group ">
                     <input type="text" class="form-control" placeholder="Recherche">
                 </div>
                 <span class="glyphicon glyphicon-search"  aria-hidden="true"></span>
             </form>
 
-
-
-
-
+            <form class="navbar-form navbar-center text-center visible-sm visible-md" role="search">
+                <div class="form-group ">
+                    <input type="text" class="form-control" placeholder="Recherche">
+                </div>
+                <span class="glyphicon glyphicon-search"  aria-hidden="true"></span>
+            </form>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
 </div>
-
-
-
-
-
-
-
-
 <section id="main">
     <div class="container">
         <ng-view></ng-view>
     </div>
 </section>
-
-
-
-
 <footer>
 <div class="container">
         <div class="process">
-
-
-
         </div>
-
-
     </div>
-
     <div class="container">
         <div class="signature">
-
-
-
         </div>
-
-
     </div>
-
-
-
-
     </footer>
 
 <!-- build:assets assets.min.js -->
@@ -275,6 +216,7 @@
 <script src="sections/mainController.js"></script>
 <script src="sections/home/home.ctrl.js"></script>
 <script src="sections/fiche/fiche.ctrl.js"></script>
+<script src="sections/admin/admin.ctrl.js"></script>
 <!--script src="sections/premieres/premieres.ctrl.js"></script>
 <script src="sections/search/search.ctrl.js"></script>
 <script src="sections/view/view.ctrl.js"></script>

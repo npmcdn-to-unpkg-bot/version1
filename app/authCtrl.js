@@ -7,6 +7,7 @@ app.controller('authCtrl', function ($scope, $rootScope, $routeParams, $location
         Data.post('login', {
             customer: customer
         }).then(function (results) {
+                console.log("RESULTS", results);
             Data.toast(results);
             if (results.status == "success") {
                 $location.path('dashboard');
@@ -25,9 +26,11 @@ app.controller('authCtrl', function ($scope, $rootScope, $routeParams, $location
         });
     };
     $scope.logout = function () {
+        console.log("lkfdnlsdnflksdklfnsdlknfklsd");
+        return;
         Data.get('logout').then(function (results) {
             Data.toast(results);
-            $location.path('login');
+            $location.path('dashboard');
         });
     }
 });

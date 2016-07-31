@@ -5,6 +5,7 @@ $app->get('/session', function() {
     $response["uid"] = $session['uid'];
     $response["email"] = $session['email'];
     $response["name"] = $session['name'];
+    $response["type"] = $session['admin'];
     echoResponse(200, $session);
 });
 
@@ -49,7 +50,7 @@ $app->post('/login', function() use ($app) {
     $db = new DbHandler();
     $password = $r->customer->password;
     $email = $r->customer->email;
-    $user = $db->getOneRecord("select uid,name,password,email,created from customers_auth where phone='$email' or email='$email'");
+    $user = $db->getOneRecord("select uid,name,password,email,created,admin from customers_auth where phone='$email' or email='$email'");
     if ($user != NULL) {
         if(passwordHash::check_password($user['password'],$password)){
         $response['status'] = "success";
@@ -58,12 +59,14 @@ $app->post('/login', function() use ($app) {
         $response['uid'] = $user['uid'];
         $response['email'] = $user['email'];
         $response['createdAt'] = $user['created'];
+        $response['type'] = $user['admin'];
         if (!isset($_SESSION)) {
             session_start();
         }
         $_SESSION['uid'] = $user['uid'];
         $_SESSION['email'] = $email;
         $_SESSION['name'] = $user['name'];
+        $_SESSION['admin'] = $user['admin'];
         } else {
             $response['status'] = "error";
             $response['message'] = 'Login failed. Incorrect credentials';

@@ -2,7 +2,7 @@ var app = angular.module('myApp', ['ngRoute', 'ngAnimate', 'toaster']);
 
 app.config(['$routeProvider',
   function ($routeProvider) {
-      console.log($routeProvider);
+      console.log("rouet here");
         $routeProvider.
         when('/home', {
             title: 'Home',
@@ -34,6 +34,11 @@ app.config(['$routeProvider',
                 templateUrl: 'sections/home/home.tpl.html',
                 controller: 'HomeController as home'
             })
+            .when('/admin', {
+                title:'admin',
+                templateUrl:'sections/admin/admin.tpl.html',
+                controller:'adminController as admin'
+            })
             .otherwise({
                 redirectTo: '/home'
             });
@@ -49,6 +54,7 @@ app.config(['$routeProvider',
                     $rootScope.uid = results.uid;
                     $rootScope.name = results.name;
                     $rootScope.email = results.email;
+                    $rootScope.type = results.admin;
                 } else {
                     /*var nextUrl = next.$$route.originalPath;
                     if (nextUrl == '/signup' || nextUrl == '/login') {
@@ -57,6 +63,7 @@ app.config(['$routeProvider',
                         $location.path("/home");
                     }*/
                 }
+                //$location();
             });
         });
     });
