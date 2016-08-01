@@ -4,8 +4,22 @@ angular
         //Setup view model object
         console.log('main CONTROLLER');
         $scope.showMenu = true;
-        console.log("rootScope");
-        console.log($rootScope);
+        Data.get('session').then(function (results) {
+            $scope.sessionInfo = results;
+
+            if (results.uid) {
+                console.log('enterede here ');
+                if($scope.sessionInfo.admin == 1) {
+                    $scope.showMenu = false
+                }
+            }
+            else {
+                console.log('entere here not logged in');
+                $location.path('home');
+            }
+            //$location();
+        });
+
         $scope.doLogin = function (customer) {
             Data.post('login', {
                 customer: customer
@@ -22,4 +36,12 @@ angular
                     }
                 });
         };
+
+        $scope.logout = function () {
+            console.log("main js logout");
+            Data.get('logout').then(function (results) {
+                Data.toast(results);
+                $location.path('home');
+            });
+        }
     });

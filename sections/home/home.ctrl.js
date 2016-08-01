@@ -1,11 +1,28 @@
 angular
     .module('myApp')
-    .controller('HomeController', function($scope, $location, $http) {
+    .controller('HomeController', function($scope, $location, $http, Data) {
         //Setup view model object
         console.log('HOME CONTROLLER');
+        $scope.showMenu = true;
         var vm = this;
         vm.btnMetier = [];
+        Data.get('session').then(function (results) {
+            $scope.sessionInfo = results;
+            console.log(results, 'results from admin');
 
+            if (results.uid) {
+                console.log('home controller ',  results);
+                if($scope.sessionInfo.admin == 1) {
+                    $location.path('admin');
+                }
+            }
+            else {
+                console.log('entere here not logged in');
+               // $location.path('home');
+            }
+
+            //$location();
+        });
        /* vm.btnMetier = [
             {id : 1 , metier: 'Tous les produits', sub_metier:''},
             {id: 2, metier: 'Métier de la fleur', sub_metier:''},
