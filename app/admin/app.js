@@ -6,17 +6,42 @@ app.config(['$routeProvider',
         $routeProvider.
         when('/login', {
             title: 'Login',
-            templateUrl: 'sections/admin/login/login.tpl.html',
+            templateUrl: 'sections/login/login.tpl.html',
             controller: 'authCtrl as login'
         })
         .when('/home', {
-            title: 'Home Dashboard',
+            title: 'Admin Dashboard',
             templateUrl: 'sections/admin/home/home.tpl.html',
             controller: 'homeController as home'
         })
+        .when('/param', {
+            title: 'Parametrage',
+            templateUrl: 'sections/admin/param/param.tpl.html',
+            controller: 'paramController as param'
+        })
+        .when('/maquette', {
+            title: 'Maquette',
+            templateUrl: 'sections/admin/maquette/maquette.tpl.html',
+            controller: 'maquetteController as maquette'
+        })
+        .when('/commande', {
+            title: 'Commande',
+            templateUrl: 'sections/admin/commande/commande.tpl.html',
+            controller: 'commandeController as comm'
+        })
+        .when('/client', {
+            title: 'Clients',
+            templateUrl: 'sections/admin/client/client.tpl.html',
+            controller: 'clientController as client'
+        })
+        .when('/revendeurs', {
+            title: 'Revendeur',
+            templateUrl: 'sections/admin/revendeur/revendeur.tpl.html',
+            controller: 'revendeurController as revendeur'
+        })
         .when('/', {
             title: 'Login',
-            templateUrl: 'sections/admin/login/login.tpl.html',
+            templateUrl: 'sections/login/login.tpl.html',
             controller: 'loginController as login'
         })
         .otherwise({
@@ -29,20 +54,7 @@ app.config(['$routeProvider',
             console.log('edafefe');
             $rootScope.authenticated = false;
             Data.get('session').then(function (results) {
-                if (results.uid) {
-                    $rootScope.authenticated = true;
-                    $rootScope.uid = results.uid;
-                    $rootScope.name = results.name;
-                    $rootScope.email = results.email;
-                } else {
-                    $location.path('login');
-                    /*var nextUrl = next.$$route.originalPath;
-                    if (nextUrl == '/signup' || nextUrl == '/login') {
-
-                    } else {
-                        $location.path("/home");
-                    }*/
-                }
+               console.log("SESSION CHECKED: ", results);
             });
         });
     });

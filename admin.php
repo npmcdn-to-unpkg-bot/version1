@@ -5,7 +5,11 @@
     <title>Exacom</title>
     <link rel="icon" type="image/png" href="assets/images/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- build:css assets/css/styles.css -->
     <!-- The CSS for the plugin itself - required -->
     <link rel="stylesheet" type="text/css" href="css/FancyProductDesigner-all.min.css" />
@@ -14,11 +18,9 @@
     <!-- endbuild -->
 </head>
 <body data-ng-app="adminApp" ng-controller="mainController">
-<section id="main">
-    <div class="container">
-        <ng-view></ng-view>
-    </div>
-</section>
+<div class="container" style="width: 100%">
+    <ng-view></ng-view>
+</div>
 
 <!-- build:assets assets.min.js -->
 <!-- ASSETS -->
@@ -35,8 +37,8 @@
 <script src="assets/js/angular-1.5.7/angular.js"></script>
 <script src="assets/js/angular-1.5.7/angular-animate.js"></script>
 <script src="assets/js/angular-1.5.7/angular-route.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="js/toaster.js"></script>
 <script src="app/admin/app.js"></script>
 <script src="app/admin/data.js"></script>
@@ -49,9 +51,14 @@
 
 <!-- / -->
 <!-- CONTROLLERS -->
-<script src="sections/admin/mainController.js"></script>
-<script src="sections/admin/login/login.ctrl.js"></script>
+<script src="sections/admincontroller.js"></script>
+<script src="sections/login/login.ctrl.js"></script>
 <script src="sections/admin/home/home.ctrl.js"></script>
+<script src="sections/admin/client/client.ctrl.js"></script>
+<script src="sections/admin/commande/commande.ctrl.js"></script>
+<script src="sections/admin/maquette/maquette.ctrl.js"></script>
+<script src="sections/admin/param/param.ctrl.js"></script>
+<script src="sections/admin/revendeur/revendeur.ctrl.js"></script>
 <!--script src="sections/premieres/premieres.ctrl.js"></script>
 <script src="sections/search/search.ctrl.js"></script>
 <script src="sections/view/view.ctrl.js"></script>
