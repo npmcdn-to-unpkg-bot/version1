@@ -39,6 +39,10 @@
 <script src="assets/js/angular-1.5.7/angular-route.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/es5-shim.min.js"></script>
+<script src="js/console-sham.min.js"></script>
+<script src="js/angular-file-upload.min.js"></script>
+<script src="js/angular-file-upload.min.js.map"></script>
 <script src="js/toaster.js"></script>
 <script src="app/admin/app.js"></script>
 <script src="app/admin/data.js"></script>
@@ -59,6 +63,7 @@
 <script src="sections/admin/maquette/maquette.ctrl.js"></script>
 <script src="sections/admin/param/param.ctrl.js"></script>
 <script src="sections/admin/revendeur/revendeur.ctrl.js"></script>
+<script src="sections/admin/sample/sample.ctrl.js"></script>
 <!--script src="sections/premieres/premieres.ctrl.js"></script>
 <script src="sections/search/search.ctrl.js"></script>
 <script src="sections/view/view.ctrl.js"></script>

@@ -49,6 +49,10 @@
 <script src="assets/js/angular-1.5.7/angular-route.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/ui-bootstrap-tpls-1.1.2.min.js"></script>
+<script src="js/es5-shim.min.js"></script>
+<script src="js/console-sham.min.js"></script>
+<script src="js/angular-file-upload.min.js"></script>
+<script src="js/angular-file-upload.min.js.map"></script>
 <script src="js/toaster.js"></script>
 <script src="app/app.js"></script>
 <script src="app/data.js"></script>

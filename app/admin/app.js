@@ -1,4 +1,4 @@
-var app = angular.module('adminApp', ['ngRoute', 'ngAnimate', 'toaster']);
+var app = angular.module('adminApp', ['ngRoute', 'ngAnimate', 'toaster','angularFileUpload']);
 
 app.config(['$routeProvider',
   function ($routeProvider) {
@@ -33,6 +33,11 @@ app.config(['$routeProvider',
             title: 'Clients',
             templateUrl: 'sections/admin/client/client.tpl.html',
             controller: 'clientController as client'
+        })
+        .when('/sample', {
+            title:      'Sample',
+            templateUrl:'sections/admin/sample/sample.tpl.html',
+            controller: 'sampleController as sample'
         })
         .when('/revendeurs', {
             title: 'Revendeur',
