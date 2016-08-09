@@ -56,7 +56,7 @@ app.config(['$routeProvider',
             })
         .when('/guide', {
                 title:      'Guide',
-                templateUrl:'sections/admin/guide/guide.tpl.html',
+                templateUrl:'sections/admin/Guide/guide.tpl.html',
                 controller: 'GuideController as guide'
             })
         .when('/', {
