@@ -44,6 +44,16 @@ app.config(['$routeProvider',
             templateUrl: 'sections/admin/revendeur/revendeur.tpl.html',
             controller: 'revendeurController as revendeur'
         })
+        .when('/compte', {
+                title:      'Compte',
+                templateUrl:'sections/admin/compte/compte.tpl.html',
+                controller: 'CompteController as compte'
+            })
+        .when('/metier', {
+                title:      'Metier',
+                templateUrl:'sections/admin/metier/metier.tpl.html',
+                controller: 'MetierController as metier'
+            })
         .when('/', {
             title: 'Login',
             templateUrl: 'sections/login/login.tpl.html',

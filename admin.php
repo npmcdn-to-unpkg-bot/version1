@@ -64,6 +64,8 @@
 <script src="sections/admin/param/param.ctrl.js"></script>
 <script src="sections/admin/revendeur/revendeur.ctrl.js"></script>
 <script src="sections/admin/sample/sample.ctrl.js"></script>
+<script src="sections/admin/compte/compte.ctrl.js"></script>
+<script src="sections/admin/metier/metier.ctrl.js"></script>
 <!--script src="sections/premieres/premieres.ctrl.js"></script>
 <script src="sections/search/search.ctrl.js"></script>
 <script src="sections/view/view.ctrl.js"></script>
