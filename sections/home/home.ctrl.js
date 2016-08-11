@@ -5,6 +5,7 @@ angular
         console.log('HOME CONTROLLER');
         var vm = this;
         vm.btnMetier = [];
+        vm.sampleMetier = [];
         Data.get('session').then(function (results) {
             $scope.sessionInfo = results;
             console.log(results, 'results from admin');
@@ -26,7 +27,18 @@ angular
             console.log("CLICKED IMG: ",data.description, data.id);
             vm.description = data.description;
             vm.src = data.src
-            $('#myModel').modal();
+            $http({
+                method: 'GET',
+                params: {mode:0, id:data.id},
+                url: 'api/v1/sampleControl.php'
+            }).then(function successCallback(response) {
+                    console.log(response);
+                    vm.sampleMetier = angular.copy(response.data);
+                    $('#myModel').modal();
+                }, function errorCallback(error) {
+                    console.log(error);
+                });
+
             //$location.path('fichetech');
         }
 

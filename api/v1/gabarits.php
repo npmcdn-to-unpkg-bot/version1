@@ -126,4 +126,15 @@ class gabarits{
         }
         return $this->mapSqlToObject($rs);
     }
+
+    public function findByIdModel($id){
+        $requete = self::$SELECT . " WHERE ID_MODELMETIER = ".$id . " ORDER BY TYPE";
+        $resultat = $this->conn->query($requete);
+        $rows = [];
+        while($row = mysqli_fetch_array($resultat))
+        {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 }
