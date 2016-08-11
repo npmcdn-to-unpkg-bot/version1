@@ -11,7 +11,7 @@ if ( !empty( $_FILES ) ) {
         $gabarit = new gabarits();
         $gabarit->setIdModelMetier($value);
         $gabarit->setDescription($_POST["nom"]);
-        $gabarit->setSrc("images/gabarits/".$_FILES['file']['name']);
+        $gabarit->setSrc("images/sample_modele/".$_FILES['file']['name']);
         $gabarit->setType('1');
         $gabarit->save();
     }
