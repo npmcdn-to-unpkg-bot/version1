@@ -6,6 +6,7 @@ class gabarits{
     private $_description   = null;
     private $_id_modelmetier= null;
     private $_src           = null;
+    private $_type          = 0;
 
     private static $SELECT = "SELECT * FROM GABARITS";
 
@@ -36,6 +37,9 @@ class gabarits{
         $this->_src = $src;
     }
 
+    public function setType($type) {
+        $this->_type = $type;
+    }
 
     //**** D�claration des getters ****
     public function getId() {
@@ -53,6 +57,10 @@ class gabarits{
     public function getSrc() {
         return $this->_src;
     }
+
+    public function getType() {
+        return $this->_type;
+    }
     //**** Fonction de suppression ****
     public function delete($id) {
         $requete = "DELETE FROM GABARITS WHERE ID=" . $id;
@@ -64,18 +72,21 @@ class gabarits{
         if ($this->_id > 0) {
             $requete = "UPDATE GABARITS SET DESCRIPTION='" . ($this->_description) . "'";
             $requete .= ",ID_MODELMETIER='" . $this->_id_modelmetier . "'";
-            $requete .= ",SRC=" . $this->_src;
+            $requete .= ",SRC='" . $this->_src . "'";
+            $requete .= ",TYPE='" . $this->_type . "'";
             $requete .= " WHERE ID=" . $this->_id;
 
         } else {
             $requete = "INSERT INTO GABARITS (";
             $requete .= "DESCRIPTION,";
             $requete .= "ID_MODELMETIER,";
-            $requete .= "SRC";
+            $requete .= "SRC,";
+            $requete .= "TYPE";
             $requete .= ") VALUES (";
             $requete .= "'" . $this->_description . "',";
             $requete .= "'" . $this->_id_modelmetier . "',";
-            $requete .= "'" . $this->_src . "')";
+            $requete .= "'" . $this->_src . "',";
+            $requete .= "'" . $this->_type . "')";
         }
 
         $r = $this->conn->query($requete) or die($this->conn->error.__LINE__);
@@ -90,6 +101,7 @@ class gabarits{
         $metier->_description = $rs->fields["DESCRIPTION"];
         $metier->_id_modelmetier = $rs->fields["ID_MODELMETIER"];
         $metier->_src = $rs->fields["SRC"];
+        $metier->_type = $rs->fields["TYPE"];
         return $metier;
     }
 

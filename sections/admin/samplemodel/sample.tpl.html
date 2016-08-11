@@ -1,10 +1,9 @@
 <header ng-include="'sections/admin/header.html'"></header>
-<div>SAMPLE</div>
 <div class="row">
     <div class="col-md-5">
 
-        <div class="col-md-4"><b>Nom d'affichage</b></div>
-        <div class="col-md-8 input-group" style="margin-bottom: 5px;">
+        <div class="col-md-3"><b>Nom </b></div>
+        <div class="col-md-9 input-group" style="margin-bottom: 5px;">
             <input type="text" class="form-control" ng-model="sample.nom" placeholder="Nom" aria-describedby="basic-addon1">
         </div>
         <div class="col-md-3"><b>Metier</b></div>
@@ -28,7 +27,7 @@
 
     <div class="col-md-7" style="margin-bottom: 40px">
 
-        <h3>Upload queue</h3>
+        <h3>Téléchargement</h3>
         <p>Queue length: {{ uploader.queue.length }}</p>
 
         <table class="table">
@@ -70,7 +69,7 @@
             </tbody>
         </table>
 
-        <div>
+        <!--div>
             <div>
                 Queue progress:
                 <div class="progress" style="">
@@ -86,7 +85,7 @@
             <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
                 <span class="glyphicon glyphicon-trash"></span> Remove all
             </button>
-        </div>
+        </div-->
 
     </div>
 

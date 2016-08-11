@@ -10,11 +10,13 @@
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <!-- build:css assets/css/styles.css -->
     <!-- The CSS for the plugin itself - required -->
     <link rel="stylesheet" type="text/css" href="css/FancyProductDesigner-all.min.css" />
     <!-- Optional - only when you would like to use custom fonts - optional -->
     <link rel="stylesheet" type="text/css" href="css/jquery.fancyProductDesigner-fonts.css" />
+    <link rel="stylesheet" type="text/css" href="sections/admin/admin.css" />
     <!-- endbuild -->
 </head>
 <body data-ng-app="adminApp" ng-controller="mainController">
@@ -39,6 +41,7 @@
 <script src="assets/js/angular-1.5.7/angular-route.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 <script src="js/es5-shim.min.js"></script>
 <script src="js/console-sham.min.js"></script>
 <script src="js/angular-file-upload.min.js"></script>
@@ -67,6 +70,7 @@
 <script src="sections/admin/compte/compte.ctrl.js"></script>
 <script src="sections/admin/metier/metier.ctrl.js"></script>
 <script src="sections/admin/guide/guide.ctrl.js"></script>
+<script src="sections/admin/samplemodel/sample.ctrl.js"></script>
 <!--script src="sections/premieres/premieres.ctrl.js"></script>
 <script src="sections/search/search.ctrl.js"></script>
 <script src="sections/view/view.ctrl.js"></script>

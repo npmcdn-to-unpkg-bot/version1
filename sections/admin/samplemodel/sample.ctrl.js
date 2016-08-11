@@ -1,20 +1,20 @@
 angular
     .module('adminApp')
-    .controller('sampleController', function($scope, $rootScope, $routeParams, $location, $http, Data, $timeout, FileUploader) {
+    .controller('sampleModelController', function($scope, $rootScope, $routeParams, $location, $http, Data, $timeout, FileUploader) {
         console.log("Admin sample controller");
         var vm = this;
         vm.uploadme = "";
         vm.arrData = [];
         vm.currentID = "";
         vm.nom = "";
-        $scope.header = "Sample Gabarits";
         $scope.hopeData = "";
+        $scope.header = "Sample Modele";
 
         vm.fnClick = function(){
             console.log("ID: ",$scope.hopeData);
         };
         var uploader = $scope.uploader = new FileUploader({
-            url: 'api/upload.php'
+            url: 'api/uploadModel.php'
         });
 
         // FILTERS

@@ -35,9 +35,14 @@ app.config(['$routeProvider',
             controller: 'clientController as client'
         })
         .when('/sample', {
-            title:      'Sample',
+            title:      'Sample Gabarits',
             templateUrl:'sections/admin/sample/sample.tpl.html',
             controller: 'sampleController as sample'
+        })
+        .when('/samplemodel', {
+            title:      'Sample Modele',
+            templateUrl:'sections/admin/samplemodel/sample.tpl.html',
+            controller: 'sampleModelController as sample'
         })
         .when('/revendeurs', {
             title: 'Revendeur',
