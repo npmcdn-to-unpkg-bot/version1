@@ -6,6 +6,7 @@ class sample{
     private $_description   = null;
     private $_id_modelmetier= null;
     private $_src           = null;
+    private $_content       = null;
 
     private static $SELECT = "SELECT * FROM SAMPLE";
 
@@ -36,6 +37,10 @@ class sample{
         $this->_src = $src;
     }
 
+    public function setContent($content) {
+        $this->_content = $content;
+    }
+
 
     //**** D�claration des getters ****
     public function getId() {
@@ -53,6 +58,11 @@ class sample{
     public function getSrc() {
         return $this->_src;
     }
+
+    public function getContent() {
+        return $this->_content;
+    }
+
     //**** Fonction de suppression ****
     public function delete($id) {
         $requete = "DELETE FROM SAMPLE WHERE ID=" . $id;
@@ -65,17 +75,20 @@ class sample{
             $requete = "UPDATE SAMPLE SET DESCRIPTION='" . ($this->_description) . "'";
             $requete .= ",ID_MODELMETIER='" . $this->_id_modelmetier . "'";
             $requete .= ",SRC=" . $this->_src;
+            $requete .= ",CONTENT=" . $this->_content;
             $requete .= " WHERE ID=" . $this->_id;
 
         } else {
             $requete = "INSERT INTO SAMPLE (";
             $requete .= "DESCRIPTION,";
             $requete .= "ID_MODELMETIER,";
-            $requete .= "SRC";
+            $requete .= "SRC,";
+            $requete .= "CONTENT";
             $requete .= ") VALUES (";
             $requete .= "'" . $this->_description . "',";
             $requete .= "'" . $this->_id_modelmetier . "',";
-            $requete .= "'" . $this->_src . "')";
+            $requete .= "'" . $this->_src . "',";
+            $requete .= "'" . $this->_content . "')";
         }
 
         $r = $this->conn->query($requete) or die($this->conn->error.__LINE__);
@@ -90,6 +103,7 @@ class sample{
         $metier->_description = $rs->fields["DESCRIPTION"];
         $metier->_id_modelmetier = $rs->fields["ID_MODELMETIER"];
         $metier->_src = $rs->fields["SRC"];
+        $metier->_content = $rs->fields["CONTENT"];
         return $metier;
     }
 

@@ -7,6 +7,8 @@ class gabarits{
     private $_id_modelmetier= null;
     private $_src           = null;
     private $_type          = 0;
+    private $_id_sample     = 0;
+    private $_reference     = "";
 
     private static $SELECT = "SELECT * FROM GABARITS";
 
@@ -41,6 +43,15 @@ class gabarits{
         $this->_type = $type;
     }
 
+    public function setIdSample($idSample) {
+        $this->_id_sample = $idSample;
+    }
+
+    public function setReference($ref) {
+        $this->_reference = $ref;
+    }
+
+
     //**** D�claration des getters ****
     public function getId() {
         return $this->_id;
@@ -61,6 +72,15 @@ class gabarits{
     public function getType() {
         return $this->_type;
     }
+
+    public function getIdSample() {
+        return $this->_id_sample;
+    }
+
+    public function getReference() {
+        return $this->_reference;
+    }
+
     //**** Fonction de suppression ****
     public function delete($id) {
         $requete = "DELETE FROM GABARITS WHERE ID=" . $id;
@@ -74,6 +94,8 @@ class gabarits{
             $requete .= ",ID_MODELMETIER='" . $this->_id_modelmetier . "'";
             $requete .= ",SRC='" . $this->_src . "'";
             $requete .= ",TYPE='" . $this->_type . "'";
+            $requete .= ",ID_SAMPLE='" . $this->_id_sample . "'";
+            $requete .= ",REFERENCE='" . $this->_reference . "'";
             $requete .= " WHERE ID=" . $this->_id;
 
         } else {
@@ -81,16 +103,20 @@ class gabarits{
             $requete .= "DESCRIPTION,";
             $requete .= "ID_MODELMETIER,";
             $requete .= "SRC,";
-            $requete .= "TYPE";
+            $requete .= "TYPE,";
+            $requete .= "ID_SAMPLE,";
+            $requete .= "REFERENCE";
             $requete .= ") VALUES (";
             $requete .= "'" . $this->_description . "',";
             $requete .= "'" . $this->_id_modelmetier . "',";
             $requete .= "'" . $this->_src . "',";
-            $requete .= "'" . $this->_type . "')";
+            $requete .= "'" . $this->_type . "',";
+            $requete .= "'" . $this->_id_sample . "',";
+            $requete .= "'" . $this->_reference . "')";
         }
 
         $r = $this->conn->query($requete) or die($this->conn->error.__LINE__);
-        return $r;
+        return $requete;
     }
 
 
@@ -102,6 +128,8 @@ class gabarits{
         $metier->_id_modelmetier = $rs->fields["ID_MODELMETIER"];
         $metier->_src = $rs->fields["SRC"];
         $metier->_type = $rs->fields["TYPE"];
+        $metier->_id_sample = $rs->fields["ID_SAMPLE"];
+        $metier->_reference = $rs->fields["REFERENCE"];
         return $metier;
     }
 
@@ -133,6 +161,27 @@ class gabarits{
         $rows = [];
         while($row = mysqli_fetch_array($resultat))
         {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    public function findByType($type) {
+        $requete = self::$SELECT . " WHERE TYPE = ".$type ." ORDER BY TYPE";
+        $resultat = $this->conn->query($requete);
+        $rows = [];
+        while($row = mysqli_fetch_array($resultat))
+        {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+    public function findEmptyGabarits(){
+        $requete = self::$SELECT . " WHERE ID_SAMPLE = 0";
+        $resultat = $this->conn->query($requete);
+        $rows = [];
+        while($row = mysqli_fetch_array($resultat)){
             $rows[] = $row;
         }
         return $rows;

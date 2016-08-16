@@ -13,6 +13,7 @@ if ( !empty( $_FILES ) ) {
         $gabarit->setDescription($_POST["nom"]);
         $gabarit->setSrc("images/gabarits/".$_FILES['file']['name']);
         $gabarit->setType('0');
+        $gabarit->setReference($_POST["reference"]);
         $gabarit->save();
     }
 

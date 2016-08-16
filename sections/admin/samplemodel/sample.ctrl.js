@@ -7,6 +7,7 @@ angular
         vm.arrData = [];
         vm.currentID = "";
         vm.nom = "";
+        vm.reference = "";
         $scope.hopeData = "";
         $scope.header = "Sample Modele";
 
@@ -49,7 +50,8 @@ angular
         };*/
         uploader.onBeforeUploadItem = function(item) {
             console.info('onBeforeUploadItem', item);
-            item.formData = [{id:$(".selObj").select2().val(), nom:vm.nom}];
+            console.info('onBeforeUploadItem', vm.reference);
+            item.formData = [{id:$(".selObj").select2().val(), nom:vm.nom, reference:vm.reference}];
         };
        /* uploader.onProgressItem = function(fileItem, progress) {
             console.info('onProgressItem', fileItem, progress);

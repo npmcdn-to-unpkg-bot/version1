@@ -23,6 +23,9 @@ angular
             ]}
         ];
 
+        vm.imgList = [];
+        vm.productList = [];
+
 
         vm.productsDesign = [
             {id:1, title:'SWIRL', imgsrc:[
@@ -58,6 +61,22 @@ angular
             ]},
         ];
 
+        vm.fnMaquette = function() {
+            $http({
+                method: 'GET',
+                params: {mode:1, type:0},
+                url: 'api/v1/sampleControl.php'
+            }).then(function successCallback(response) {
+                    console.log(response.data);
+                    vm.productList = response.data;
+                    console.log(vm.productList);
+                }, function errorCallback(error) {
+                    console.log(error);
+                });
+        };
+
+        vm.fnMaquette();
+
         $timeout(function() {
             $("#imgScroll").endlessScroll({ width: '100%',height: '250px', steps: -2, speed: 40, mousestop: true });
 
@@ -73,7 +92,9 @@ angular
                         draggable: true,
                         rotatable: true,
                         autoCenter: true,
-                        boundingBox: "Base"
+                        boundingBox: "Base",
+                        curvable:true,
+                        curveReverse:true
                     },
                     customImageParameters: {
                         draggable: true,
@@ -84,6 +105,21 @@ angular
                         autoCenter: true,
                         boundingBox: "Base"
                     },
+                    customAdds:{
+                        uploads:true
+                    },
+                    customImageAjaxSettings:{
+                        data:{
+                            saveOnServer:1,
+                            uploadsDir:'../test',
+                            uploadsDirURL:"./test"
+                        },
+                        url:'api/imageUpload.php'
+                    },
+                    imageParameters : {
+                        availableFilters: ['grayscale', 'sepia', 'sepia2'],
+                        filter:true
+                    },
                     actions:  {
                         'top': ['download','print', 'snap', 'preview-lightbox'],
                         'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code', 'ruler'],
@@ -92,7 +128,6 @@ angular
                     }
                 },
                 yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts);
-
 
             //print button
             $('#print-button').click(function(){
@@ -106,16 +141,32 @@ angular
                 return false;
             });
 
+
+
             //checkout button with getProduct()
             $('#checkout-button').click(function(){
                 var product = yourDesigner.getProduct();
                 console.log(product);
+                return;
+                $http({
+                    method: 'GET',
+                    params: {mode:2, data:product},
+                    url: 'api/v1/sampleControl.php'
+                }).then(function successCallback(response) {
+                        console.log(response.data, "  ::data");
+                    }, function errorCallback(error) {
+                        console.log(error);
+                    });
                 return false;
             });
 
             //event handler when the price is changing
             $yourDesigner.on('priceChange', function(evt, price, currentPrice) {
                 $('#thsirt-price').text(currentPrice);
+            });
+
+            $yourDesigner.on('ready', function(evt, price, currentPrice) {
+
             });
 
             //save image on webserver
@@ -135,5 +186,51 @@ angular
                 });
 
             });
+            vm.fnNouveau = function() {
+                console.log("NOUVEAU");
+                $http({
+                    method: 'GET',
+                    params: {mode:1, type:0},
+                    url: 'api/v1/sampleControl.php'
+                }).then(function successCallback(response) {
+                        console.log(response);
+                    }, function errorCallback(error) {
+                        console.log(error);
+                    });
+            };
+
+            vm.fnOpenModal = function(){
+                $('#myModel').modal();
+            }
+
+            vm.fnSauvegarde = function() {
+                var product = yourDesigner.getProduct();
+                console.log("SAUVEGARDE");
+                $http({
+                    method: 'GET',
+                    params: {mode:2, data:product},
+                    url: 'api/v1/sampleControl.php'
+                }).then(function successCallback(response) {
+                        console.log(response.data, "  ::data");
+                    }, function errorCallback(error) {
+                        console.log(error);
+                    });
+                console.log(product);
+                console.log("*******************");
+            }
+
         }, 0);
+
+        vm.fnModifier = function() {
+            console.log("modifier");
+        }
+
+        vm.fnSuppression = function() {
+            console.log("SUPPRESSION");
+        }
+
+       $(document).ready(function(){
+           //vm.fnMaquette();
+        });
+
     });
