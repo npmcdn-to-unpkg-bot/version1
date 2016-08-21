@@ -4,13 +4,14 @@
         <div id="main-container">
             <h3 id="clothing">Maquette Customizé</h3>
             <div class="btn-group" role="group" style="margin-bottom: 15px">
-                <button type="button" class="btn btn-info" ng-click="model.fnNouveau()">Nouveau</button>
-                <button type="button" class="btn btn-success" ng-click="model.fnModifier()">Modifer</button>
-                <button type="button" class="btn btn-danger" ng-click="model.fnSuppression()">Suppression</button>
                 <button type="button" class="btn btn-warning" ng-click="model.fnOpenModal()">Sauvegarder</button>
+                <button type="button" class="btn btn-warning" ng-click="model.fnImage()">CREATE IMAGE</button>
             </div>
             <div id="model" class="fpd-container fpd-shadow-2 fpd-topbar fpd-tabs fpd-tabs-side fpd-top-actions-centered fpd-bottom-actions-centered fpd-views-inside-left">
                 <div data-ng-repeat="product in model.productList" class="fpd-product" title="{{product.title}}" data-thumbnail="{{product.thumbnail_src}}">
+                    <div class="fpd-product" title="Arrière Plan" data-thumbnail="images/gabarits/maquette_complet1.png">
+                        <img ng-repeat="source in  product.img_src" src="{{source.src}}"   title="Base" data-parameters='{"left": 325, "top": 329, "colors": "#d59211", "price": 20}'/>
+                    </div>
                     <img ng-repeat="source in  product.img_src" src="{{source.src}}"   title="Base" data-parameters='{"left": 325, "top": 329, "colors": "#d59211", "price": 20}'/>
                 </div>
                 <div class="fpd-design">
@@ -24,7 +25,7 @@
             <div class="fpd-clearfix" style="margin-top: 30px;">
                 <div class="api-buttons fpd-container fpd-left">
                     <a href="#" id="print-button" class="fpd-btn">Print</a>
-                    <a href="#" id="image-button" class="fpd-btn">Create Image</a>
+                    <a id="image-button" class="fpd-btn">Create Image</a>
                     <a href="#" id="checkout-button" class="fpd-btn">Sauvegarder</a>
                     <a href="#" id="recreation-button" class="fpd-btn">Recreate product</a>
                 </div>
@@ -33,28 +34,46 @@
                 </div>
             </div>
 
-            <!--p class="fpd-container">
+            <p class="fpd-container">
                 Only working on a webserver:<br />
                 <span class="fpd-btn" id="save-image-php">Save image with php</span>
                 <span class="fpd-btn" id="send-image-mail-php">Send image to mail</span>
-            </p-->
+            </p>
 
         </div>
     </div>
 </div>
 <div id="myModel" class="modal fade" data-backdrop="static">
-    <div class="modal-dialog" style="width: 75%;height: 600px;">
+    <div class="modal-dialog" style="width: 75%;height: 500px;">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title"> Gabarits Non Associés</h4>
+                <h4 class="modal-title"> Info Sample</h4>
             </div>
-            <div class="modal-body" style="height: 550px">
-                <div class="col-md-3" style="margin-bottom: 5px; margin-top: 5px;">
-                    <div class="tileImg">
-                        <span><p></p></span>
-                    </div>
+            <div class="modal-body" style="height: 400px">
+                <div class="col-md-2"><b>Libelle </b></div>
+                <div class="col-md-10 input-group" style="margin-bottom: 5px;">
+                    <input type="text" class="form-control" ng-model="model.libelle" placeholder="Libelle" aria-describedby="basic-addon1">
                 </div>
+                <div class="col-md-2"><b>Reference </b></div>
+                <div class="col-md-10 input-group" style="margin-bottom: 5px;">
+                    <input type="text" class="form-control" ng-model="model.reference" placeholder="Reference" aria-describedby="basic-addon1">
+                </div>
+                <div class="col-md-2"><b>Description </b></div>
+                <div class="col-md-10 input-group" style="margin-bottom: 5px;">
+                    <textarea class="form-control custom-control" ng-model="model.description" rows="3" style="resize:none"></textarea>
+                </div>
+                <div class="col-md-2" style="margin-bottom: 5px; margin-top: 5px;"><b>Model</b></div>
+                <div class="col-md-10" style="margin-bottom: 5px; margin-top: 5px;">
+                    <select class="selObj" multiple="multiple" style="width: 100%" ng-model="hopeData">
+                        <option ng-repeat="data in model.arrData" value="{{data.id}}">{{data.description}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default pull-left">Quitter</button>
+                <button class="btn btn-danger pull-right">Annuler</button>
+                <button class="btn btn-success pull-right">Valider</button>
             </div>
         </div>
     </div>

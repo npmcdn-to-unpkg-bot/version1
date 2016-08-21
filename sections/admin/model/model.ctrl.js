@@ -26,6 +26,20 @@ angular
         vm.imgList = [];
         vm.productList = [];
 
+        vm.fnModelMetier = function() {
+            $http({
+                method: 'GET',
+                params: {mode:2},
+                url: 'api/v1/info.php'
+            }).then(function successCallback(response) {
+                    console.log(response.data);
+                    vm.arrData = response.data;
+                }, function errorCallback(error) {
+                    console.log(error);
+                });
+        };
+
+        vm.fnModelMetier();
 
         vm.productsDesign = [
             {id:1, title:'SWIRL', imgsrc:[
@@ -138,6 +152,7 @@ angular
             //create an image
             $('#image-button').click(function(){
                 var image = yourDesigner.createImage();
+                console.log(image);
                 return false;
             });
 
@@ -200,6 +215,8 @@ angular
             };
 
             vm.fnOpenModal = function(){
+                var product = yourDesigner.getProduct();
+                console.log(product);
                 $('#myModel').modal();
             }
 
@@ -219,6 +236,15 @@ angular
                 console.log("*******************");
             }
 
+            vm.fnImage = function() {
+                yourDesigner.getProductDataURL(function(dataURL) {
+                    $.post( "api/save_image.php", { base64_image: dataURL} ).done(function(data) {
+                        console.log(data);
+                        console.log("TESTING ISSUE ");
+                    })
+                });
+            }
+
         }, 0);
 
         vm.fnModifier = function() {
@@ -229,8 +255,12 @@ angular
             console.log("SUPPRESSION");
         }
 
-       $(document).ready(function(){
-           //vm.fnMaquette();
-        });
 
+        $(document).ready(function() {
+            $(".selObj").select2(
+                {allowClear: true,
+                    closeOnSelect:false}
+            );
+            var $eventSelect = $(".selObj");
+        });
     });
