@@ -65,15 +65,14 @@
                 </div>
                 <div class="col-md-2" style="margin-bottom: 5px; margin-top: 5px;"><b>Model</b></div>
                 <div class="col-md-10" style="margin-bottom: 5px; margin-top: 5px;">
-                    <select class="selObj" multiple="multiple" style="width: 100%" ng-model="hopeData">
+                    <select class="selObj" multiple="multiple" style="width: 100%" ng-model="strData">
                         <option ng-repeat="data in model.arrData" value="{{data.id}}">{{data.description}}</option>
                     </select>
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-default pull-left">Quitter</button>
-                <button class="btn btn-danger pull-right">Annuler</button>
-                <button class="btn btn-success pull-right">Valider</button>
+                <button class="btn btn-success pull-right" ng-click="model.fnValider()">Valider</button>
+                <button class="btn btn-danger pull-left" ng-click="model.fnQuitter()">Annuler</button>
             </div>
         </div>
     </div>

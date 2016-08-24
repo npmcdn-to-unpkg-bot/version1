@@ -4,6 +4,21 @@ angular
     console.log("MODEL CONTROLLER");
         var vm = this;
         $scope.header = "Construction des modeles";
+        vm.libelle = '';
+        vm.description = '';
+        vm.reference = '';
+
+
+        Data.get('session').then(function (results) {
+            if (results.uid) {
+
+            } else {
+                $location.path("/login");
+            }
+
+            //$location();
+        });
+
         vm.imgList = [
             {id:1,title:"Cheque cadeau",src:"assets/img/cheque_cadeau.png"},
             {id:2,title:"Carte Message",src:"assets/img/carte_message.png"},
@@ -215,9 +230,33 @@ angular
             };
 
             vm.fnOpenModal = function(){
-                var product = yourDesigner.getProduct();
-                console.log(product);
+                $scope.product = yourDesigner.getProduct();
+                console.log($scope.product);
                 $('#myModel').modal();
+            }
+
+            vm.fnQuitter  = function(){
+                console.log("annuler");
+                $('#myModel').modal('hide');
+            };
+
+            vm.fnValider = function(){
+
+                yourDesigner.getProductDataURL(function(dataURL) {
+                    console.log("LIBELLE:: ", vm.libelle);
+                    console.log("DEscription:: ", vm.description);
+                    console.log("Reference:: ", vm.reference);
+                    console.log("selected: ", $(".selObj").select2().val());
+                    console.log("valider", yourDesigner.getProduct());
+
+                    if(vm.libelle == '' || vm.description=='' || $(".selObj").select2().val() == '' || $(".selObj").select2().val() == null){
+                        bootbox.alert("Toutes les informations sont obligatoire");
+                        return;
+                    }
+
+                    $.post( "api/save_image.php", { base64_image: dataURL, ref:vm.reference, libelle:vm.libelle, description:vm.description, metiers:$(".selObj").select2().val(), data:yourDesigner.getProduct()});
+                });
+
             }
 
             vm.fnSauvegarde = function() {
@@ -238,8 +277,8 @@ angular
 
             vm.fnImage = function() {
                 yourDesigner.getProductDataURL(function(dataURL) {
-                    $.post( "api/save_image.php", { base64_image: dataURL} ).done(function(data) {
-                        console.log(data);
+                    $.post( "api/save_image.php", { base64_image: dataURL} ).success(function(data) {
+                       // console.log(data);
                         console.log("TESTING ISSUE ");
                     })
                 });
@@ -254,6 +293,8 @@ angular
         vm.fnSuppression = function() {
             console.log("SUPPRESSION");
         }
+
+
 
 
         $(document).ready(function() {
