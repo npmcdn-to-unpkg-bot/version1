@@ -7,7 +7,7 @@ app.config(['$routeProvider',
         when('/login', {
             title: 'Login',
             templateUrl: 'sections/login/login.tpl.html',
-            controller: 'authCtrl as login'
+            controller: 'loginController as login'
         })
         .when('/home', {
             title: 'Admin Dashboard',
