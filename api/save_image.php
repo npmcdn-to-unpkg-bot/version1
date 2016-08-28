@@ -1,13 +1,13 @@
 <?php
 require_once 'v1/dbHandler.php';
 include_once 'v1/include_all.php';
+include_once 'chromePHP.php';
 /*
 *
 * An example php that gets the 64 bit encoded PNG URL and creates an image of it
 *
 */
-include_once 'chromePHP.php';
-
+chromePHP::log("TESTING 1 2 3");
 $db = new DbHandler();
 $session = $db->getSession();
 chromePHP::log("SESSION VALUES HOPEFULLY ".$session['uid'] . "  ---  " . $session['email'] . "  ::  " . $session['name'] . "  --  " . $session['admin']);
@@ -17,31 +17,15 @@ chromePHP::log("------------------------");
 //get the base-64 from data
 $base64_str = substr($_POST['base64_image'], strpos($_POST['base64_image'], ",")+1);
 
-/*chromePHP::log("reference::  " . $_POST["ref"]);
-chromePHP::log("Libelle::  " . $_POST["libelle"]);
-chromePHP::log("description::  " . $_POST["description"]);
-chromePHP::log("data::  " . ($_POST["data"]));
-chromePHP::log("metiers::  " . json_encode($_POST["metiers"]));*/
 //decode base64 string
 
+chromePHP::log(json_encode($_POST["metiers"]));
 
 $decoded = base64_decode($base64_str);
 $strTime = strtotime('now').".png";
 $png_url = "../images/flat_images/product_".$strTime;
 //create png from decoded base 64 string and save the image in the parent folder
 $result = file_put_contents($png_url, $decoded);
-
-chromePHP::log("LIBELLE:" . $_POST["libelle"]);
-chromePHP::log("DESCRIPTION:" . $_POST["description"]);
-chromePHP::log("THUMBNAIL:" . "product_".$strTime);
-chromePHP::log("ID_MAIN: " . " - ");
-chromePHP::log("ID_BACK: " . " - ");
-chromePHP::log("REF: " . $_POST["ref"]);
-chromePHP::log("DATE CREATED: " . date("Y-m-d h:i:sa", strtotime('now')));
-chromePHP::log("DATE MODIFIED: " . date("Y-m-d h:i:sa", strtotime('now')));
-chromePHP::log("CREATED BY: " . $session['uid']);
-chromePHP::log("MODIFIED BY: " . $session['uid']);
-
 $cata = new cata();
 $cata->setLibelle($_POST["libelle"]);
 $cata->setDescription($_POST["description"]);
@@ -56,6 +40,15 @@ $cata->save();
 $lastID = $cata->getLastId();
 
 $cata = $cata->findByPrimaryKey($lastID);
+
+foreach($_POST["metiers"] as $ligne){
+    chromePHP::log($ligne);
+    $cata_metier = new cata_metier();
+    $cata_metier->setId_Cata($lastID);
+    $cata_metier->setId_Metier($ligne);
+    $cata_metier->setActive(1);
+    $cata_metier->save();
+}
 $contents = $_POST["data"];
 $count=0;
 foreach($contents as $ligne){
@@ -95,8 +88,6 @@ $cata->save();
 
 $cata_ligne_params = new cata_ligne_params();
 $test = $cata_ligne_params->findByPrimaryKey(1);
-chromePHP::log("TESTTT");
-chromePHP::log(unserialize($test->getParams()));
 
 //send result - the url of the png or 0
 header('Content-Type: application/json');

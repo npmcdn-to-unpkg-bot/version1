@@ -202,9 +202,7 @@ class cata {
     public function findByPrimaryKey($key) { // Recherche d'une adresse par id
         $requete = self::$SELECT . " WHERE ID=" . $key;
         $rs = $this->conn->query($requete);
-        if ($rs->EOF) {
-            return null;
-        }
+
         return $this->mapSqlToObject(mysqli_fetch_array($rs));
     }
 
@@ -213,5 +211,17 @@ class cata {
         $rs = $this->conn->query($requete);
         $result = mysqli_fetch_array($rs);
         return $result["ID"];
+    }
+
+    public function findAllByMetier($id){
+        $requete = "SELECT * FROM CATA C INNER JOIN CATA_METIER CM ON C.ID = CM.ID_CATA WHERE CM.ID_METIER=".$id;
+        $rs = $this->conn->query($requete);
+
+        $rows = [];
+        while($row = mysqli_fetch_array($rs))
+        {
+            $rows[] = $row;
+        }
+        return $rows;
     }
 } 

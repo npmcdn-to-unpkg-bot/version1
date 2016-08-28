@@ -1,9 +1,12 @@
 
 angular
     .module('myApp')
-    .controller('ficheController', function($scope, $location, $timeout) {
+    .controller('ficheController', function($scope, $location, $timeout, messages, $http) {
         console.log('fiche controller');
+        $(".modal-backdrop").remove();
+        $("body").removeClass("modal-open");
         var vm = this;
+        //console.log("FACT VALUE:: ", messages.list);
 
         vm.imgList = [
             {id:1,title:"Cheque cadeau",src:"assets/img/cheque_cadeau.png"},
@@ -55,88 +58,146 @@ angular
                 {id:1, src:'images/carte/2.png', title:'IMG2'},
                 {id:1, src:'images/carte/3.png', title:'IMG3'},
                 {id:1, src:'images/carte/4.png', title:'IMG4'},
-                {id:1, src:'images/carte/5.png', title:'IMG5'},
+                {id:1, src:'images/carte/5.png', title:'IMG5'}
             ]},
         ];
 
-        $timeout(function() {
-            $("#imgScroll").endlessScroll({ width: '100%',height: '250px', steps: -2, speed: 40, mousestop: true });
+        vm.fnInit = function() {
+            console.log('initialising protocol info.php');
+            console.log(messages.list[0]);
+            $http({
+                method: 'GET',
+                params: {mode:3,metier: messages.list[0].id_metier},
+                url: 'api/v1/info.php'
+            }).then(function successCallback(response) {
+                    console.log("MODEL METIER");
+                    console.log(response.data);
+                    vm.productList1=response.data;
+                    $timeout(function() {
+                        $("#imgScroll").endlessScroll({ width: '100%',height: '250px', steps: -2, speed: 40, mousestop: true });
 
-                var $yourDesigner = $('#model'),
-                    pluginOpts = {
-                        stageWidth: 1200,
-                        editorMode: true,
-                        fonts: ['Arial', 'Fearless', 'Helvetica', 'Times New Roman', 'Verdana', 'Geneva', 'Gorditas','Amerika Sans'],
-                        customTextParameters: {
-                            colors: false,
-                            removable: true,
-                            resizable: true,
-                            draggable: true,
-                            rotatable: true,
-                            autoCenter: true,
-                            boundingBox: "Base"
-                        },
-                        customImageParameters: {
-                            draggable: true,
+                        var $yourDesigner = $('#model'),
+                            pluginOpts = {
+                                stageWidth: 1200,
+                                editorMode: true,
+                                fonts: ['Arial', 'Fearless', 'Helvetica', 'Times New Roman', 'Verdana', 'Geneva', 'Gorditas','Amerika Sans'],
+                                customTextParameters: {
+                                    colors: true,
+                                    removable: true,
+                                    resizable: true,
+                                    draggable: true,
+                                    rotatable: true,
+                                    autoCenter: true,
+                                    boundingBox: "Base",
+                                    curvable:true,
+                                    curveReverse:true
+                                },
+                                customImageParameters: {
+                                    draggable: true,
+                                    removable: true,
+                                    resizable: true,
+                                    rotatable: true,
+                                    colors: '#000',
+                                    autoCenter: true,
+                                    boundingBox: "Base"
+                                },
+                                customAdds:{
+                                    uploads:true
+                                },
+                                customImageAjaxSettings:{
+                                    data:{
+                                        saveOnServer:1,
+                                        uploadsDir:'../test',
+                                        uploadsDirURL:"./test"
+                                    },
+                                    url:'api/imageUpload.php'
+                                },
+                                imageParameters : {
+                                    availableFilters: ['grayscale', 'sepia', 'sepia2'],
+                                    filter:true
+                                },
+                                actions:  {
+                                    'top': ['download','print', 'snap', 'preview-lightbox'],
+                                    'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code', 'ruler'],
+                                    'bottom': ['undo','redo'],
+                                    'left': ['manage-layers','info','save','load']
+                                }
+                            }
+                        //, yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts);
+                        var yourDesigner = new FancyProductDesigner($yourDesigner);
+                        /*yourDesigner.addProduct([{title:'TEST', thumbnail:'images/carte/5.png', elements:[{source:'images/gabarits/fond image r-1.png', title:'TEST', type:'image',
+                            parameters:{draggable: true,
                             removable: true,
                             resizable: true,
                             rotatable: true,
                             colors: '#000',
-                            autoCenter: true,
-                            boundingBox: "Base"
-                        },
-                        actions:  {
-                            'top': ['download','print', 'snap', 'preview-lightbox'],
-                            'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code', 'ruler'],
-                            'bottom': ['undo','redo'],
-                            'left': ['manage-layers','info','save','load']
-                        }
-                    },
-                    yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts);
+                            autoCenter: true}}]}]);*/
 
 
-                //print button
-                $('#print-button').click(function(){
-                    yourDesigner.print();
-                    return false;
+                        angular.forEach(vm.productList1, function(value){
+                            var arrProducts = [];
+                            arrProducts.push({title:value.libelle, thumbnail:value.src, elements:value.front.elements});
+                            arrProducts.push({title:value.libelle, thumbnail:value.src, elements:value.back.elements});
+                            yourDesigner.addProduct(arrProducts);
+                            console.log(arrProducts, "  £££");
+                            console.log(value.front.elements, "  £££");
+                            console.log(value.back.elements, "  £££");
+
+                        });
+
+
+                        //print button
+                        $('#print-button').click(function(){
+                            yourDesigner.print();
+                            return false;
+                        });
+
+                        //create an image
+                        $('#image-button').click(function(){
+                            var image = yourDesigner.createImage();
+                            return false;
+                        });
+
+                        //checkout button with getProduct()
+                        $('#checkout-button').click(function(){
+                            var product = yourDesigner.getProduct();
+                            console.log(product);
+                            return false;
+                        });
+
+                        //event handler when the price is changing
+                        $yourDesigner.on('priceChange', function(evt, price, currentPrice) {
+                            $('#thsirt-price').text(currentPrice);
+                        });
+
+                        //save image on webserver
+                        $('#save-image-php').click(function() {
+
+                            yourDesigner.getProductDataURL(function(dataURL) {
+                                $.post( "php/save_image.php", { base64_image: dataURL} );
+                            });
+
+                        });
+
+                        //send image via mail
+                        $('#send-image-mail-php').click(function() {
+
+                            yourDesigner.getProductDataURL(function(dataURL) {
+                                $.post( "php/send_image_via_mail.php", { base64_image: dataURL} );
+                            });
+
+                        });
+                    }, 0);
+                }, function errorCallback(error) {
+                    console.log(error);
                 });
 
-                //create an image
-                $('#image-button').click(function(){
-                    var image = yourDesigner.createImage();
-                    return false;
-                });
 
-                //checkout button with getProduct()
-                $('#checkout-button').click(function(){
-                    var product = yourDesigner.getProduct();
-                    console.log(product);
-                    return false;
-                });
+        }
+        vm.fnInit();
 
-                //event handler when the price is changing
-                $yourDesigner.on('priceChange', function(evt, price, currentPrice) {
-                    $('#thsirt-price').text(currentPrice);
-                });
 
-                //save image on webserver
-                $('#save-image-php').click(function() {
 
-                    yourDesigner.getProductDataURL(function(dataURL) {
-                        $.post( "php/save_image.php", { base64_image: dataURL} );
-                    });
-
-                });
-
-                //send image via mail
-                $('#send-image-mail-php').click(function() {
-
-                    yourDesigner.getProductDataURL(function(dataURL) {
-                        $.post( "php/send_image_via_mail.php", { base64_image: dataURL} );
-                    });
-
-                });
-        }, 0);
 
 
     });

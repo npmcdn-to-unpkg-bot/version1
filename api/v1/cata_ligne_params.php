@@ -152,4 +152,18 @@ class cata_ligne_params {
         $result = mysqli_fetch_array($rs);
         return $result["ID"];
     }
+
+    public function findByIdCata($id){
+        $requete = "SELECT * FROM CATA_LIGNE_PARAMS WHERE ID_CATA_LIGNE=".$id;
+        $rs = $this->conn->query($requete);
+        $rows = [];
+        while($row = mysqli_fetch_array($rs))
+        {
+            //$rows[] = array("id_cata_ligne"=>$rs["id_cata_ligne"], "params"=>unserialize($rs["params"]), "src"=>$rs["src"] , "title" => $rs["title"] , "type" => $rs["type"]);
+            array_push($rows,array("id_cata_ligne"=>$row["id_cata_ligne"], "parameters"=>(unserialize($row["params"])), "source"=>$row["src"] , "title" => $row["title"] , "type" => $row["type"]) );
+        }
+
+        return $rows;
+    }
+
 } 

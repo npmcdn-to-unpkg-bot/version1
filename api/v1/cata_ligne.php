@@ -82,9 +82,9 @@ class cata_ligne {
     //***** Fonction de passege sql->objet *****
     private function mapSqlToObject($rs) {
         $cata_ligne = new cata_ligne();
-        $cata_ligne->_id = $rs->fields["ID"];
-        $cata_ligne->_title = $rs->fields["TITLE"];
-        $cata_ligne->_src = $rs->fields["SRC"];
+        $cata_ligne->_id = $rs["id"];
+        $cata_ligne->_title = $rs["title"];
+        $cata_ligne->_src = $rs["src"];
         return $cata_ligne;
     }
 
@@ -102,11 +102,13 @@ class cata_ligne {
 
     public function findByPrimaryKey($key) { // Recherche d'une adresse par id
         $requete = self::$SELECT . " WHERE ID=" . $key;
+chromePHP::log($requete);
         $rs = $this->conn->query($requete);
-        if ($rs->EOF) {
+
+        /*if ($rs->EOF) {
             return null;
-        }
-        return $this->mapSqlToObject($rs);
+        }*/
+        return $this->mapSqlToObject(mysqli_fetch_array($rs));
     }
 
     public function getLastId(){
@@ -114,5 +116,9 @@ class cata_ligne {
         $rs = $this->conn->query($requete);
         $result = mysqli_fetch_array($rs);
         return $result["ID"];
+    }
+
+    public function getInfo($id){
+        $requete = "SELECT * FROM CATA_LIGNE CL INNER JOIN CATA_LIGNE_PARAMS CLP ON CL.ID = CLP.ID_CATA_LIGNE WHERE CL.ID=".$id;
     }
 } 

@@ -99,6 +99,188 @@ angular
                     console.log(response.data);
                     vm.productList = response.data;
                     console.log(vm.productList);
+                    $timeout(function() {
+                        $("#imgScroll").endlessScroll({ width: '100%',height: '250px', steps: -2, speed: 40, mousestop: true });
+
+                        var $yourDesigner = $('#model'),
+                            pluginOpts = {
+                                stageWidth: 1200,
+                                editorMode: true,
+                                fonts: ['Arial', 'Fearless', 'Helvetica', 'Times New Roman', 'Verdana', 'Geneva', 'Gorditas','Amerika Sans'],
+                                customTextParameters: {
+                                    colors: true,
+                                    removable: true,
+                                    resizable: true,
+                                    draggable: true,
+                                    rotatable: true,
+                                    autoCenter: true,
+                                    boundingBox: "Base",
+                                    curvable:true,
+                                    curveReverse:true
+                                },
+                                customImageParameters: {
+                                    draggable: true,
+                                    removable: true,
+                                    resizable: true,
+                                    rotatable: true,
+                                    colors: '#000',
+                                    autoCenter: true,
+                                    boundingBox: "Base"
+                                },
+                                customAdds:{
+                                    uploads:true
+                                },
+                                customImageAjaxSettings:{
+                                    data:{
+                                        saveOnServer:1,
+                                        uploadsDir:'../test',
+                                        uploadsDirURL:"./test"
+                                    },
+                                    url:'api/imageUpload.php'
+                                },
+                                imageParameters : {
+                                    availableFilters: ['grayscale', 'sepia', 'sepia2'],
+                                    filter:true
+                                },
+                                actions:  {
+                                    'top': ['download','print', 'snap', 'preview-lightbox'],
+                                    'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code', 'ruler'],
+                                    'bottom': ['undo','redo'],
+                                    'left': ['manage-layers','info','save','load']
+                                }
+                            },
+                            yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts);
+
+                        //print button
+                        $('#print-button').click(function(){
+                            yourDesigner.print();
+                            return false;
+                        });
+
+                        //create an image
+                        $('#image-button').click(function(){
+                            var image = yourDesigner.createImage();
+                            console.log(image);
+                            return false;
+                        });
+
+
+
+                        //checkout button with getProduct()
+                        $('#checkout-button').click(function(){
+                            var product = yourDesigner.getProduct();
+                            console.log(product);
+                            return;
+                            $http({
+                                method: 'GET',
+                                params: {mode:2, data:product},
+                                url: 'api/v1/sampleControl.php'
+                            }).then(function successCallback(response) {
+                                    console.log(response.data, "  ::data");
+                                }, function errorCallback(error) {
+                                    console.log(error);
+                                });
+                            return false;
+                        });
+
+                        //event handler when the price is changing
+                        $yourDesigner.on('priceChange', function(evt, price, currentPrice) {
+                            $('#thsirt-price').text(currentPrice);
+                        });
+
+                        $yourDesigner.on('ready', function(evt, price, currentPrice) {
+
+                        });
+
+                        //save image on webserver
+                        $('#save-image-php').click(function() {
+
+                            yourDesigner.getProductDataURL(function(dataURL) {
+                                $.post( "php/save_image.php", { base64_image: dataURL} );
+                            });
+
+                        });
+
+                        //send image via mail
+                        $('#send-image-mail-php').click(function() {
+
+                            yourDesigner.getProductDataURL(function(dataURL) {
+                                $.post( "php/send_image_via_mail.php", { base64_image: dataURL} );
+                            });
+
+                        });
+                        vm.fnNouveau = function() {
+                            console.log("NOUVEAU");
+                            $http({
+                                method: 'GET',
+                                params: {mode:1, type:0},
+                                url: 'api/v1/sampleControl.php'
+                            }).then(function successCallback(response) {
+                                    console.log(response);
+                                }, function errorCallback(error) {
+                                    console.log(error);
+                                });
+                        };
+
+                        vm.fnOpenModal = function(){
+                            $scope.product = yourDesigner.getProduct();
+                            console.log($scope.product);
+                            $('#myModel').modal();
+                        }
+
+                        vm.fnQuitter  = function(){
+                            console.log("annuler");
+                            $('#myModel').modal('hide');
+                        };
+
+                        vm.fnValider = function(){
+
+                            yourDesigner.getProductDataURL(function(dataURL) {
+                                console.log("LIBELLE:: ", vm.libelle);
+                                console.log("DEscription:: ", vm.description);
+                                console.log("Reference:: ", vm.reference);
+                                console.log("selected: ", $(".selObj").select2().val());
+                                console.log("valider", yourDesigner.getProduct());
+
+                                if(vm.libelle == '' || vm.description=='' || $(".selObj").select2().val() == '' || $(".selObj").select2().val() == null){
+                                    bootbox.alert("Toutes les informations sont obligatoire");
+                                    return;
+                                }
+
+                                $.post( "api/save_image.php", { base64_image: dataURL, ref:vm.reference, libelle:vm.libelle, description:vm.description, metiers:$(".selObj").select2().val(), data:yourDesigner.getProduct()});
+
+                            });
+                            $('#myModel').modal('hide');
+
+                        }
+
+                        vm.fnSauvegarde = function() {
+                            var product = yourDesigner.getProduct();
+                            console.log("SAUVEGARDE");
+                            $http({
+                                method: 'GET',
+                                params: {mode:2, data:product},
+                                url: 'api/v1/sampleControl.php'
+                            }).then(function successCallback(response) {
+                                    console.log(response.data, "  ::data");
+                                }, function errorCallback(error) {
+                                    console.log(error);
+                                });
+                            console.log(product);
+                            console.log("*******************");
+                        }
+
+                        vm.fnImage = function() {
+                            yourDesigner.getProductDataURL(function(dataURL) {
+                                $.post( "api/save_image.php", { base64_image: dataURL} ).success(function(data) {
+                                    // console.log(data);
+                                    console.log("TESTING ISSUE ");
+                                })
+                            });
+                        }
+
+                    }, 0);
+
                 }, function errorCallback(error) {
                     console.log(error);
                 });
@@ -106,185 +288,7 @@ angular
 
         vm.fnMaquette();
 
-        $timeout(function() {
-            $("#imgScroll").endlessScroll({ width: '100%',height: '250px', steps: -2, speed: 40, mousestop: true });
 
-            var $yourDesigner = $('#model'),
-                pluginOpts = {
-                    stageWidth: 1200,
-                    editorMode: true,
-                    fonts: ['Arial', 'Fearless', 'Helvetica', 'Times New Roman', 'Verdana', 'Geneva', 'Gorditas','Amerika Sans'],
-                    customTextParameters: {
-                        colors: true,
-                        removable: true,
-                        resizable: true,
-                        draggable: true,
-                        rotatable: true,
-                        autoCenter: true,
-                        boundingBox: "Base",
-                        curvable:true,
-                        curveReverse:true
-                    },
-                    customImageParameters: {
-                        draggable: true,
-                        removable: true,
-                        resizable: true,
-                        rotatable: true,
-                        colors: '#000',
-                        autoCenter: true,
-                        boundingBox: "Base"
-                    },
-                    customAdds:{
-                        uploads:true
-                    },
-                    customImageAjaxSettings:{
-                        data:{
-                            saveOnServer:1,
-                            uploadsDir:'../test',
-                            uploadsDirURL:"./test"
-                        },
-                        url:'api/imageUpload.php'
-                    },
-                    imageParameters : {
-                        availableFilters: ['grayscale', 'sepia', 'sepia2'],
-                        filter:true
-                    },
-                    actions:  {
-                        'top': ['download','print', 'snap', 'preview-lightbox'],
-                        'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code', 'ruler'],
-                        'bottom': ['undo','redo'],
-                        'left': ['manage-layers','info','save','load']
-                    }
-                },
-                yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts);
-
-            //print button
-            $('#print-button').click(function(){
-                yourDesigner.print();
-                return false;
-            });
-
-            //create an image
-            $('#image-button').click(function(){
-                var image = yourDesigner.createImage();
-                console.log(image);
-                return false;
-            });
-
-
-
-            //checkout button with getProduct()
-            $('#checkout-button').click(function(){
-                var product = yourDesigner.getProduct();
-                console.log(product);
-                return;
-                $http({
-                    method: 'GET',
-                    params: {mode:2, data:product},
-                    url: 'api/v1/sampleControl.php'
-                }).then(function successCallback(response) {
-                        console.log(response.data, "  ::data");
-                    }, function errorCallback(error) {
-                        console.log(error);
-                    });
-                return false;
-            });
-
-            //event handler when the price is changing
-            $yourDesigner.on('priceChange', function(evt, price, currentPrice) {
-                $('#thsirt-price').text(currentPrice);
-            });
-
-            $yourDesigner.on('ready', function(evt, price, currentPrice) {
-
-            });
-
-            //save image on webserver
-            $('#save-image-php').click(function() {
-
-                yourDesigner.getProductDataURL(function(dataURL) {
-                    $.post( "php/save_image.php", { base64_image: dataURL} );
-                });
-
-            });
-
-            //send image via mail
-            $('#send-image-mail-php').click(function() {
-
-                yourDesigner.getProductDataURL(function(dataURL) {
-                    $.post( "php/send_image_via_mail.php", { base64_image: dataURL} );
-                });
-
-            });
-            vm.fnNouveau = function() {
-                console.log("NOUVEAU");
-                $http({
-                    method: 'GET',
-                    params: {mode:1, type:0},
-                    url: 'api/v1/sampleControl.php'
-                }).then(function successCallback(response) {
-                        console.log(response);
-                    }, function errorCallback(error) {
-                        console.log(error);
-                    });
-            };
-
-            vm.fnOpenModal = function(){
-                $scope.product = yourDesigner.getProduct();
-                console.log($scope.product);
-                $('#myModel').modal();
-            }
-
-            vm.fnQuitter  = function(){
-                console.log("annuler");
-                $('#myModel').modal('hide');
-            };
-
-            vm.fnValider = function(){
-
-                yourDesigner.getProductDataURL(function(dataURL) {
-                    console.log("LIBELLE:: ", vm.libelle);
-                    console.log("DEscription:: ", vm.description);
-                    console.log("Reference:: ", vm.reference);
-                    console.log("selected: ", $(".selObj").select2().val());
-                    console.log("valider", yourDesigner.getProduct());
-
-                    if(vm.libelle == '' || vm.description=='' || $(".selObj").select2().val() == '' || $(".selObj").select2().val() == null){
-                        bootbox.alert("Toutes les informations sont obligatoire");
-                        return;
-                    }
-
-                    $.post( "api/save_image.php", { base64_image: dataURL, ref:vm.reference, libelle:vm.libelle, description:vm.description, metiers:$(".selObj").select2().val(), data:yourDesigner.getProduct()});
-                });
-
-            }
-
-            vm.fnSauvegarde = function() {
-                var product = yourDesigner.getProduct();
-                console.log("SAUVEGARDE");
-                $http({
-                    method: 'GET',
-                    params: {mode:2, data:product},
-                    url: 'api/v1/sampleControl.php'
-                }).then(function successCallback(response) {
-                        console.log(response.data, "  ::data");
-                    }, function errorCallback(error) {
-                        console.log(error);
-                    });
-                console.log(product);
-                console.log("*******************");
-            }
-
-            vm.fnImage = function() {
-                yourDesigner.getProductDataURL(function(dataURL) {
-                    $.post( "api/save_image.php", { base64_image: dataURL} ).success(function(data) {
-                       // console.log(data);
-                        console.log("TESTING ISSUE ");
-                    })
-                });
-            }
-
-        }, 0);
 
         vm.fnModifier = function() {
             console.log("modifier");

@@ -1,11 +1,12 @@
 angular
     .module('myApp')
-    .controller('HomeController', function($scope, $location, $http, Data) {
+    .controller('HomeController', function($scope, $location, $http, Data, messages) {
         //Setup view model object
         console.log('HOME CONTROLLER');
         var vm = this;
         vm.btnMetier = [];
         vm.sampleMetier = [];
+        vm.globalVal = '';
         Data.get('session').then(function (results) {
             $scope.sessionInfo = results;
             console.log(results, 'results from admin');
@@ -100,6 +101,13 @@ angular
                 }, function errorCallback(error) {
                     console.log(error);
                 });
+        }
+
+        vm.fnModelClick  = function($id, $id_metier) {
+           console.log($id);
+            $('#myModel').modal('hide');
+            messages.add($id, $id_metier);
+            $location.path('fichetech');
         }
         vm.fnRecupMetier();
         vm.fnModelMetierAll();

@@ -1,6 +1,6 @@
 app.factory("Data", ['$http', 'toaster',
     function ($http, toaster) { // This service connects to our REST API
-console.log('toaster');
+
         var serviceBase = 'api/v1/';
 
         var obj = {};
@@ -30,3 +30,15 @@ console.log('toaster');
 
         return obj;
 }]);
+
+app.factory('messages', function(){
+    var messages = {};
+
+    messages.list = [];
+
+    messages.add = function(id_sample, id_metier){
+        messages.list.push({ id_sample: id_sample, id_metier:id_metier});
+    };
+
+    return messages;
+});
