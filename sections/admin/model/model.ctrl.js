@@ -151,6 +151,34 @@ angular
                             },
                             yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts);
 
+                        console.log(vm.productList);
+                        angular.forEach(vm.productList, function(value){
+                            var arrProducts = [];
+                            var arrFront = [];
+                            var arrBack = [];
+                            angular.forEach(value.elemfront.params, function(value1){
+                                console.log(value1.parameters.fill);
+                                var flag = false;
+                                if(value1.parameters.fill != "false"){
+                                    flag = value1.parameters.fill;
+                                }
+                                arrFront.push({source:value1.source, title:value1.title, type:value1.type,parameters:{"left":value1.parameters.left, "top":value1.parameters.top, "fill":flag}})
+                            })
+                            angular.forEach(value.elemback.params, function(value1){
+                                var flag = false;
+                                if(value1.parameters.fill != "false"){
+                                    console.log("FILLLING:: ", value1.parameters.fill);
+                                    flag = value1.parameters.fill;
+                                }
+                                console.log(value1.parameters.fill);
+                                arrBack.push({source:value1.source, title:value1.title, type:value1.type,parameters:{"left":value1.parameters.left, "top":value1.parameters.top, "fill":flag}})
+                            })
+                            arrProducts.push({title:value.title, thumbnail:value.thumbnail_src, elements:arrFront});
+                            arrProducts.push({title:value.title, thumbnail:value.thumbnail_src, elements:arrBack});
+                            yourDesigner.addProduct(arrProducts);
+                            console.log(arrProducts, "  £££");
+
+                        });
                         //print button
                         $('#print-button').click(function(){
                             yourDesigner.print();
