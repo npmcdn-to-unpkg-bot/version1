@@ -62,7 +62,7 @@ app.config(['$routeProvider',
         .when('/metier', {
                 title:      'Metier',
                 templateUrl:'sections/admin/metier/metier.tpl.html',
-                controller: 'MetierController as metier'
+                controller: 'metierController as metier'
             })
         .when('/guide', {
                 title:      'Guide',

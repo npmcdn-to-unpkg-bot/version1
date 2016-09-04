@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="assets/images/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
     <!-- Optional theme -->
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -16,7 +16,10 @@
     <link rel="stylesheet" type="text/css" href="css/FancyProductDesigner-all.min.css" />
     <!-- Optional - only when you would like to use custom fonts - optional -->
     <link rel="stylesheet" type="text/css" href="css/jquery.fancyProductDesigner-fonts.css" />
+    <link rel="stylesheet" type="text/css" href="js/slickgrid/css/smoothness/jquery-ui-1.8.16.custom.css" />
     <link rel="stylesheet" type="text/css" href="sections/admin/admin.css" />
+    <link rel="stylesheet" type="text/css" href="js/slickgrid/slick-default-theme.css" />
+    <link rel="stylesheet" type="text/css" href="js/slickgrid/slick.grid.css" />
     <!-- endbuild -->
 </head>
 <body data-ng-app="adminApp" ng-controller="mainController">
@@ -33,6 +36,8 @@
 <script src="js/jquery.ui.mouse.min.js"></script>
 <script src="js/jquery.ui.draggable.min.js"></script>
 <script src="js/jquery.ui.sortable.min.js"></script>
+<script src="js/slickgrid/lib/jquery.event.drag-2.2.js"></script>
+<script src="js/slickgrid/lib/jquery.event.drop-2.2.js"></script>
 <script src="assets/js/endless_scroll_min.js"></script>
 <script src="js/fabric.min.js"></script>
 <script src="js/FancyProductDesigner-all.min.js"></script>
@@ -40,7 +45,9 @@
 <script src="assets/js/angular-1.5.7/angular-animate.js"></script>
 <script src="assets/js/angular-1.5.7/angular-route.js"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<!--script src="js/bootstrap.min.js"></script-->
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="js/bootbox.min.js"></script>
 <script src="js/select2.min.js"></script>
 <script src="js/es5-shim.min.js"></script>
@@ -52,6 +59,17 @@
 <script src="app/admin/data.js"></script>
 <script src="app/admin/directives.js"></script>
 <script src="app/admin/authCtrl.js"></script>
+<script src="js/slickgrid/lib/firebugx.js"></script>
+<script src="js/slickgrid/lib/jquery.sparkline.min.js"></script>
+<script src="js/slickgrid/lib/qunit.js"></script>
+<script src="js/slickgrid/slick.core.js"></script>
+<script src="js/slickgrid/slick.dataview.js"></script>
+<script src="js/slickgrid/slick.editors.js"></script>
+<script src="js/slickgrid/slick.formatters.js"></script>
+<script src="js/slickgrid/slick.grid.js"></script>
+<script src="js/slickgrid/slick.groupitemmetadataprovider.js"></script>
+<script src="js/slickgrid/slick.remotemodel.js"></script>
+
 <!-- / -->
 <!-- endbuild -->
 <!-- build:js app.min.js -->

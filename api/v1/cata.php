@@ -224,4 +224,16 @@ class cata {
         }
         return $rows;
     }
+
+    public function findAllByIdCataRange($str){
+        $requete = "SELECT * FROM CATA C WHERE C.id IN ($str)";
+        $rs = $this->conn->query($requete);
+
+        $rows = [];
+        while($row = mysqli_fetch_array($rs))
+        {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 } 

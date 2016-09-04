@@ -86,8 +86,8 @@ angular
                 {id:1, src:'images/carte/2.png', title:'IMG2'},
                 {id:1, src:'images/carte/3.png', title:'IMG3'},
                 {id:1, src:'images/carte/4.png', title:'IMG4'},
-                {id:1, src:'images/carte/5.png', title:'IMG5'},
-            ]},
+                {id:1, src:'images/carte/5.png', title:'IMG5'}
+            ]}
         ];
 
         vm.fnMaquette = function() {
@@ -106,6 +106,8 @@ angular
                             pluginOpts = {
                                 stageWidth: 1200,
                                 editorMode: true,
+                                improvedResizeQuality:true,
+                                loadFirstProductInStage:false,
                                 fonts: ['Arial', 'Fearless', 'Helvetica', 'Times New Roman', 'Verdana', 'Geneva', 'Gorditas','Amerika Sans'],
                                 customTextParameters: {
                                     colors: true,
@@ -138,10 +140,6 @@ angular
                                     },
                                     url:'api/imageUpload.php'
                                 },
-                                imageParameters : {
-                                    availableFilters: ['grayscale', 'sepia', 'sepia2'],
-                                    filter:true
-                                },
                                 actions:  {
                                     'top': ['download','print', 'snap', 'preview-lightbox'],
                                     'right': ['magnify-glass', 'zoom', 'reset-product', 'qr-code', 'ruler'],
@@ -151,36 +149,630 @@ angular
                             },
                             yourDesigner = new FancyProductDesigner($yourDesigner, pluginOpts);
 
-                        console.log(vm.productList);
+
+                        var test = angular.copy(vm.productList);
+
                         angular.forEach(vm.productList, function(value){
                             var arrProducts = [];
                             var arrFront = [];
                             var arrBack = [];
+
                             angular.forEach(value.elemfront.params, function(value1){
-                                console.log(value1.parameters.fill);
                                 var flag = false;
+
+
                                 if(value1.parameters.fill != "false"){
                                     flag = value1.parameters.fill;
                                 }
-                                arrFront.push({source:value1.source, title:value1.title, type:value1.type,parameters:{"left":value1.parameters.left, "top":value1.parameters.top, "fill":flag}})
+                                if(value1.parameters.flipX == "false"){
+                                    value1.parameters.flipX = false;
+                                }
+                                else{
+                                    value1.parameters.flipX = true;
+                                }
+
+                                if(value1.parameters.flipY == "false"){
+                                    value1.parameters.flipY = false;
+                                }
+                                else{
+                                    value1.parameters.flipY = true;
+                                }
+                                if(value1.parameters.autoCenter == "false"){
+                                    value1.parameters.autoCenter = false;
+                                }
+                                else{
+                                    value1.parameters.autoCenter = true;
+                                }
+
+                                if(value1.parameters.autoSelect == "false"){
+                                    value1.parameters.autoSelect = false;
+                                }
+                                else{
+                                    value1.parameters.autoSelect = true;
+                                }
+
+                                if(value1.parameters.colorLinkGroup == "false"){
+                                    value1.parameters.colorLinkGroup = false;
+                                }
+                                else{
+                                    value1.parameters.colorLinkGroup = true;
+                                }
+
+                                if(value1.parameters.copyable == "false"){
+                                    value1.parameters.copyable = false;
+                                }
+                                else{
+                                    value1.parameters.copyable = true;
+                                }
+
+                                if(value1.parameters.cornerSize == "false"){
+                                    value1.parameters.cornerSize = false;
+                                }
+                                else if(value1.parameters.cornerSize == "true"){
+                                    value1.parameters.cornerSize = true;
+                                }
+                                else{
+                                    value1.parameters.cornerSize = parseInt(value1.parameters.cornerSize);
+                                }
+
+
+                                if(value1.parameters.draggable == "false"){
+                                    value1.parameters.draggable = false;
+                                }
+                                else{
+                                    value1.parameters.draggable = true;
+                                }
+
+                                if(value1.parameters.evented == "false"){
+                                    value1.parameters.evented = false;
+                                }
+                                else{
+                                    value1.parameters.evented = true;
+                                }
+
+                                if(value1.parameters.filter == "false"){
+                                    value1.parameters.filter = false;
+                                }
+                                else{
+                                    value1.parameters.filter = true;
+                                }
+
+                                if(value1.parameters.isCustom == "false"){
+                                    value1.parameters.isCustom = false;
+                                }
+                                else{
+                                    value1.parameters.isCustom = true;
+                                }
+
+                                if(value1.parameters.isEditable == "false"){
+                                    value1.parameters.isEditable = false;
+                                }
+                                else{
+                                    value1.parameters.isEditable = true;
+                                }
+
+                                if(value1.parameters.lockUniScaling == "false"){
+                                    value1.parameters.lockUniScaling = false;
+                                }
+                                else{
+                                    value1.parameters.lockUniScaling = true;
+                                }
+
+                                if(value1.parameters.removable == "false"){
+                                    value1.parameters.removable = false;
+                                }
+                                else{
+                                    value1.parameters.removable = true;
+                                }
+
+                                if(value1.parameters.replaceInAllViews == "false"){
+                                    value1.parameters.replaceInAllViews = false;
+                                }
+                                else{
+                                    value1.parameters.replaceInAllViews = true;
+                                }
+
+                                if(value1.parameters.resizable == "false"){
+                                    value1.parameters.resizable = false;
+                                }
+                                else{
+                                    value1.parameters.resizable = true;
+                                }
+
+                                if(value1.parameters.rotatable == "false"){
+                                    value1.parameters.rotatable = false;
+                                }
+                                else{
+                                    value1.parameters.rotatable = true;
+                                }
+
+                                if(value1.parameters.topped == "false"){
+                                    value1.parameters.topped = false;
+                                }
+                                else{
+                                    value1.parameters.topped = true;
+                                }
+
+                                if(value1.parameters.uniScalingUnlockable == "false"){
+                                    value1.parameters.uniScalingUnlockable = false;
+                                }
+                                else{
+                                    value1.parameters.uniScalingUnlockable = true;
+                                }
+
+                                if(value1.parameters.uploadZone == "false"){
+                                    value1.parameters.uploadZone = false;
+                                }
+                                else{
+                                    value1.parameters.uploadZone = true;
+                                }
+
+                                if(value1.parameters.zChangeable == "false"){
+                                    value1.parameters.zChangeable = false;
+                                }
+
+                                else{
+                                    value1.parameters.zChangeable = true;
+                                }
+
+                                if(value1.parameters.curvable == "false"){
+                                    value1.parameters.curvable = false;
+                                }
+                                else{
+                                    value1.parameters.curvable = true;
+                                }
+
+                                if(value1.parameters.curved == "false"){
+                                    value1.parameters.curved = false;
+                                }
+                                else{
+                                    value1.parameters.curved = true;
+                                }
+                                if(value1.parameters.curveReverse == "false"){
+                                    value1.parameters.curveReverse = false;
+                                }
+                                else{
+                                    value1.parameters.curveReverse = true;
+                                }
+
+                                if(value1.parameters.curveRadius == "false"){
+                                    value1.parameters.curveRadius = false;
+                                }
+                                else{
+                                    value1.parameters.curveRadius = true;
+                                }
+
+                                if(value1.parameters.editable == "false"){
+                                    value1.parameters.editable = false;
+                                }
+                                else{
+                                    value1.parameters.editable = true;
+                                }
+
+                                if(value1.parameters.colors == "false"){
+                                    value1.parameters.colors = false;
+                                }
+                                else if(value1.parameters.colors == "true"){
+                                    value1.parameters.colors = true;
+                                }
+
+                                if(value1.type == 'image'){
+                                    arrFront.push({source:value1.source, title:value1.title, type:value1.type,parameters:{
+                                        "left"  :   parseFloat(value1.parameters.left),
+                                        "top"   :   parseFloat(value1.parameters.top),
+                                        "fill"  :   flag,
+                                        "angle" :   parseInt(value1.parameters.angle),
+                                        "autoCenter":value1.parameters.autoCenter,
+                                        "autoSelect":value1.parameters.autoSelect,
+                                        "boundingBox":value1.parameters.boundingBox,
+                                        "boundingBoxMode":value1.parameters.boundingBoxMode,
+                                        "colorLinkGroup":value1.parameters.colorLinkGroup,
+                                        "cornerSize":value1.parameters.cornerSize,
+                                        "copyable":value1.parameters.copyable,
+                                        "colors":value1.parameters.colors,
+                                        "availableFilters":new Array("grayscale", "sepia", "sepia2"),
+                                        "draggable":value1.parameters.draggable,
+                                        "evented":value1.parameters.evented,
+                                        "filter":value1.parameters.filter,
+                                        "flipX":value1.parameters.flipX,
+                                        "flipY":value1.parameters.flipY,
+                                        "height":parseInt(value1.parameters.height),
+                                        "isCustom":value1.parameters.isCustom,
+                                        "isEditable":value1.parameters.isEditable,
+                                        "lockUniScaling":value1.parameters.lockUniScaling,
+                                        "opacity":parseInt(value1.parameters.opacity),
+                                        "originX":value1.parameters.originX,
+                                        "originY":value1.parameters.originY,
+                                        "padding":parseInt(value1.parameters.padding),
+                                        "removable":value1.parameters.removable,
+                                        "replace":value1.parameters.replace,
+                                        "replaceInAllViews":value1.parameters.replaceInAllViews,
+                                        "resizable":value1.parameters.resizable,
+                                        "rotatable":value1.parameters.rotatable,
+                                        "scaleX":parseFloat(value1.parameters.scaleX),
+                                        "scaleY":parseFloat(value1.parameters.scaleY),
+                                        "toppped":value1.parameters.topped,
+                                        "uniScalingUnlockable":value1.parameters.uniScalingUnlockable,
+                                        "uploadZone":value1.parameters.uploadZone,
+                                        "width":parseFloat(value1.parameters.width),
+                                        "uploadZoneScaleMode":value1.parameters.uploadZoneScaleMode,
+                                        "z":value1.parameters.z,
+                                        "zChangeable":value1.parameters.zChangeable
+                                    }})
+                                }
+                                else if(value1.type == 'text'){
+                                    arrFront.push({source:value1.source, title:value1.title, type:value1.type,parameters:{
+                                        "left"  :   parseInt(value1.parameters.left),
+                                        "top"   :   parseInt(value1.parameters.top),
+                                        "fill"  :   flag,
+                                        "angle" :   parseInt(value1.parameters.angle),
+                                        "autoCenter":value1.parameters.autoCenter,
+                                        "autoSelect":value1.parameters.autoSelect,
+                                        "boundingBox":value1.parameters.boundingBox,
+                                        "boundingBoxMode":value1.parameters.boundingBoxMode,
+                                        "colorLinkGroup":value1.parameters.colorLinkGroup,
+                                        "cornerSize":value1.parameters.cornerSize,
+                                        "curvable":value1.parameters.curvable,
+                                        "colors":value1.parameters.colors,
+                                        "curveRadius":80,
+                                        "curveReverse":value1.parameters.curveReverse,
+                                        "curveSpacing":parseInt(value1.parameters.curveSpacing),
+                                        "curved":value1.parameters.curved,
+                                        "copyable":value1.parameters.copyable,
+                                        "draggable":value1.parameters.draggable,
+                                        "editable":value1.parameters.editable,
+                                        "evented":value1.parameters.evented,
+                                        "flipX":value1.parameters.flipX,
+                                        "flipY":value1.parameters.flipY,
+                                        "fontFamily":value1.parameters.fontFamily,
+                                        "fontSize":parseInt(value1.parameters.fontSize),
+                                        "fontStyle":value1.parameters.fontStyle,
+                                        "fontWeight":value1.parameters.fontWeight,
+                                        "height":parseFloat(value1.parameters.height),
+                                        "isCustom":value1.parameters.isCustom,
+                                        "isEditable":value1.parameters.isEditable,
+                                        "lineHeight":parseInt(value1.parameters.lineHeight),
+                                        "lockUniScaling":value1.parameters.lockUniScaling,
+                                        "maxLength":parseInt(value1.parameters.maxLength),
+                                        "maxLines":parseInt(value1.parameters.maxLines),
+                                        "opacity":parseInt(value1.parameters.opacity),
+                                        "originX":value1.parameters.originX,
+                                        "originY":value1.parameters.originY,
+                                        "padding":parseInt(value1.parameters.padding),
+                                        "removable":value1.parameters.removable,
+                                        "replace":value1.parameters.replace,
+                                        "replaceInAllViews":value1.parameters.replaceInAllViews,
+                                        "resizable":value1.parameters.resizable,
+                                        "rotatable":value1.parameters.rotatable,
+                                        "scaleX":parseFloat(value1.parameters.scaleX),
+                                        "scaleY":parseFloat(value1.parameters.scaleY),
+                                        "stroke":value1.parameters.stroke,
+                                        "strokeWidth":parseInt(value1.parameters.strokeWidth),
+                                        "text":value1.parameters.text,
+                                        "textAlign":value1.parameters.textAlign,
+                                        "textBox":parseInt(value1.parameters.textBox),
+                                        "textDecoration":value1.parameters.textDecoration,
+                                        "toppped":value1.parameters.topped,
+                                        "width":parseFloat(value1.parameters.width),
+                                        "z":parseInt(value1.parameters.z),
+                                        "zChangeable":value1.parameters.zChangeable
+                                    }})
+                                }
+
+
                             })
                             angular.forEach(value.elemback.params, function(value1){
                                 var flag = false;
                                 if(value1.parameters.fill != "false"){
-                                    console.log("FILLLING:: ", value1.parameters.fill);
                                     flag = value1.parameters.fill;
                                 }
-                                console.log(value1.parameters.fill);
-                                arrBack.push({source:value1.source, title:value1.title, type:value1.type,parameters:{"left":value1.parameters.left, "top":value1.parameters.top, "fill":flag}})
+                                if(value1.parameters.flipX == "false"){
+                                    value1.parameters.flipX = false;
+                                }
+                                else{
+                                    value1.parameters.flipX = true;
+                                }
+
+                                if(value1.parameters.flipY == "false"){
+                                    value1.parameters.flipY = false;
+                                }
+                                else{
+                                    value1.parameters.flipY = true;
+                                }
+                                if(value1.parameters.autoCenter == "false"){
+                                    value1.parameters.autoCenter = false;
+                                }
+                                else{
+                                    value1.parameters.autoCenter = true;
+                                }
+
+                                if(value1.parameters.autoSelect == "false"){
+                                    value1.parameters.autoSelect = false;
+                                }
+                                else{
+                                    value1.parameters.autoSelect = true;
+                                }
+
+                                if(value1.parameters.colorLinkGroup == "false"){
+                                    value1.parameters.colorLinkGroup = false;
+                                }
+                                else{
+                                    value1.parameters.colorLinkGroup = true;
+                                }
+
+                                if(value1.parameters.copyable == "false"){
+                                    value1.parameters.copyable = false;
+                                }
+                                else{
+                                    value1.parameters.copyable = true;
+                                }
+
+                                if(value1.parameters.cornerSize == "false"){
+                                    value1.parameters.cornerSize = false;
+                                }
+                                else if(value1.parameters.cornerSize == "true"){
+                                    value1.parameters.cornerSize = true;
+                                }
+
+                                else{
+                                    value1.parameters.cornerSize = parseInt(value1.parameters.cornerSize);
+                                }
+
+
+                                if(value1.parameters.draggable == "false"){
+                                    value1.parameters.draggable = false;
+                                }
+                                else{
+                                    value1.parameters.draggable = true;
+                                }
+
+                                if(value1.parameters.evented == "false"){
+                                    value1.parameters.evented = false;
+                                }
+                                else{
+                                    value1.parameters.evented = true;
+                                }
+
+                                if(value1.parameters.filter == "false"){
+                                    value1.parameters.filter = false;
+                                }
+                                else{
+                                    value1.parameters.filter = true;
+                                }
+
+                                if(value1.parameters.isCustom == "false"){
+                                    value1.parameters.isCustom = false;
+                                }
+                                else{
+                                    value1.parameters.isCustom = true;
+                                }
+
+                                if(value1.parameters.isEditable == "false"){
+                                    value1.parameters.isEditable = false;
+                                }
+                                else{
+                                    value1.parameters.isEditable = true;
+                                }
+
+                                if(value1.parameters.lockUniScaling == "false"){
+                                    value1.parameters.lockUniScaling = false;
+                                }
+                                else{
+                                    value1.parameters.lockUniScaling = true;
+                                }
+
+                                if(value1.parameters.removable == "false"){
+                                    value1.parameters.removable = false;
+                                }
+                                else{
+                                    value1.parameters.removable = true;
+                                }
+
+                                if(value1.parameters.replaceInAllViews == "false"){
+                                    value1.parameters.replaceInAllViews = false;
+                                }
+                                else{
+                                    value1.parameters.replaceInAllViews = true;
+                                }
+
+                                if(value1.parameters.resizable == "false"){
+                                    value1.parameters.resizable = false;
+                                }
+                                else{
+                                    value1.parameters.resizable = true;
+                                }
+
+                                if(value1.parameters.rotatable == "false"){
+                                    value1.parameters.rotatable = false;
+                                }
+                                else{
+                                    value1.parameters.rotatable = true;
+                                }
+
+                                if(value1.parameters.topped == "false"){
+                                    value1.parameters.topped = false;
+                                }
+                                else{
+                                    value1.parameters.topped = true;
+                                }
+
+                                if(value1.parameters.uniScalingUnlockable == "false"){
+                                    value1.parameters.uniScalingUnlockable = false;
+                                }
+                                else{
+                                    value1.parameters.uniScalingUnlockable = true;
+                                }
+
+                                if(value1.parameters.uploadZone == "false"){
+                                    value1.parameters.uploadZone = false;
+                                }
+                                else{
+                                    value1.parameters.uploadZone = true;
+                                }
+
+                                if(value1.parameters.zChangeable == "false"){
+                                    value1.parameters.zChangeable = false;
+                                }
+
+                                else{
+                                    value1.parameters.zChangeable = true;
+                                }
+
+                                if(value1.parameters.curvable == "false"){
+                                    value1.parameters.curvable = false;
+                                }
+                                else{
+                                    value1.parameters.curvable = true;
+                                }
+
+                                if(value1.parameters.curved == "false"){
+                                    value1.parameters.curved = false;
+                                }
+                                else{
+                                    value1.parameters.curved = true;
+                                }
+
+                                if(value1.parameters.curveRadius == "false"){
+                                    value1.parameters.curveRadius = false;
+                                }
+                                else{
+                                    value1.parameters.curveRadius = true;
+                                }
+                                if(value1.parameters.curveReverse == "false"){
+                                    value1.parameters.curveReverse = false;
+                                }
+                                else{
+                                    value1.parameters.curveReverse = true;
+                                }
+                                if(value1.parameters.editable == "false"){
+                                    value1.parameters.editable = false;
+                                }
+                                else{
+                                    value1.parameters.editable = true;
+                                }
+                                if(value1.parameters.colors == "false"){
+                                    value1.parameters.colors = false;
+                                }
+                                else if(value1.parameters.colors == "true"){
+                                    value1.parameters.colors = true;
+                                }
+
+                                if(value1.type == 'image'){
+                                    arrBack.push({source:value1.source, title:value1.title, type:value1.type,parameters:{
+                                        "left"  :   parseFloat(value1.parameters.left),
+                                        "top"   :   parseFloat(value1.parameters.top),
+                                        "fill"  :   flag,
+                                        "angle" :   parseInt(value1.parameters.angle),
+                                        "autoCenter":value1.parameters.autoCenter,
+                                        "autoSelect":value1.parameters.autoSelect,
+                                        "boundingBox":value1.parameters.boundingBox,
+                                        "boundingBoxMode":value1.parameters.boundingBoxMode,
+                                        "colorLinkGroup":value1.parameters.colorLinkGroup,
+                                        "cornerSize":value1.parameters.cornerSize,
+                                        "copyable":value1.parameters.copyable,
+                                        "colors":value1.parameters.colors,
+                                        "availableFilters":new Array("grayscale", "sepia", "sepia2"),
+                                        "draggable":value1.parameters.draggable,
+                                        "evented":value1.parameters.evented,
+                                        "filter":value1.parameters.filter,
+                                        "flipX":value1.parameters.flipX,
+                                        "flipY":value1.parameters.flipY,
+                                        "height":parseInt(value1.parameters.height),
+                                        "isCustom":value1.parameters.isCustom,
+                                        "isEditable":value1.parameters.isEditable,
+                                        "lockUniScaling":value1.parameters.lockUniScaling,
+                                        "opacity":parseInt(value1.parameters.opacity),
+                                        "originX":value1.parameters.originX,
+                                        "originY":value1.parameters.originY,
+                                        "padding":parseInt(value1.parameters.padding),
+                                        "removable":value1.parameters.removable,
+                                        "replace":value1.parameters.replace,
+                                        "replaceInAllViews":value1.parameters.replaceInAllViews,
+                                        "resizable":value1.parameters.resizable,
+                                        "rotatable":value1.parameters.rotatable,
+                                        "scaleX":parseFloat(value1.parameters.scaleX),
+                                        "scaleY":parseFloat(value1.parameters.scaleY),
+                                        "toppped":value1.parameters.topped,
+                                        "uniScalingUnlockable":value1.parameters.uniScalingUnlockable,
+                                        "uploadZone":value1.parameters.uploadZone,
+                                        "width":parseFloat(value1.parameters.width),
+                                        "uploadZoneScaleMode":value1.parameters.uploadZoneScaleMode,
+                                        "z":value1.parameters.z,
+                                        "zChangeable":value1.parameters.zChangeable
+                                    }})
+                                }
+                                else if(value1.type == 'text'){
+                                    arrBack.push({source:value1.source, title:value1.title, type:value1.type,parameters:{
+                                        "left"  :   parseInt(value1.parameters.left),
+                                        "top"   :   parseInt(value1.parameters.top),
+                                        "fill"  :   flag,
+                                        "angle" :   parseInt(value1.parameters.angle),
+                                        "autoCenter":value1.parameters.autoCenter,
+                                        "autoSelect":value1.parameters.autoSelect,
+                                        "boundingBox":value1.parameters.boundingBox,
+                                        "boundingBoxMode":value1.parameters.boundingBoxMode,
+                                        "colorLinkGroup":value1.parameters.colorLinkGroup,
+                                        "cornerSize":value1.parameters.cornerSize,
+                                        "curvable":value1.parameters.curvable,
+                                        "colors":value1.parameters.colors,
+                                        "curveRadius":80,
+                                        "curveReverse":value1.parameters.curveReverse,
+                                        "curveSpacing":parseInt(value1.parameters.curveSpacing),
+                                        "curved":value1.parameters.curved,
+                                        "copyable":value1.parameters.copyable,
+                                        "draggable":value1.parameters.draggable,
+                                        "editable":value1.parameters.editable,
+                                        "evented":value1.parameters.evented,
+                                        "flipX":value1.parameters.flipX,
+                                        "flipY":value1.parameters.flipY,
+                                        "fontFamily":value1.parameters.fontFamily,
+                                        "fontSize":parseInt(value1.parameters.fontSize),
+                                        "fontStyle":value1.parameters.fontStyle,
+                                        "fontWeight":value1.parameters.fontWeight,
+                                        "height":parseFloat(value1.parameters.height),
+                                        "isCustom":value1.parameters.isCustom,
+                                        "isEditable":value1.parameters.isEditable,
+                                        "lineHeight":parseInt(value1.parameters.lineHeight),
+                                        "lockUniScaling":value1.parameters.lockUniScaling,
+                                        "maxLength":parseInt(value1.parameters.maxLength),
+                                        "maxLines":parseInt(value1.parameters.maxLines),
+                                        "opacity":parseInt(value1.parameters.opacity),
+                                        "originX":value1.parameters.originX,
+                                        "originY":value1.parameters.originY,
+                                        "padding":parseInt(value1.parameters.padding),
+                                        "removable":value1.parameters.removable,
+                                        "replace":value1.parameters.replace,
+                                        "replaceInAllViews":value1.parameters.replaceInAllViews,
+                                        "resizable":value1.parameters.resizable,
+                                        "rotatable":value1.parameters.rotatable,
+                                        "scaleX":parseFloat(value1.parameters.scaleX),
+                                        "scaleY":parseFloat(value1.parameters.scaleY),
+                                        "stroke":value1.parameters.stroke,
+                                        "strokeWidth":parseInt(value1.parameters.strokeWidth),
+                                        "text":value1.parameters.text,
+                                        "textAlign":value1.parameters.textAlign,
+                                        "textBox":parseInt(value1.parameters.textBox),
+                                        "textDecoration":value1.parameters.textDecoration,
+                                        "toppped":value1.parameters.topped,
+                                        "width":parseFloat(value1.parameters.width),
+                                        "z":parseInt(value1.parameters.z),
+                                        "zChangeable":value1.parameters.zChangeable
+                                    }})
+                                }
                             })
                             arrProducts.push({title:value.title, thumbnail:value.thumbnail_src, elements:arrFront});
                             arrProducts.push({title:value.title, thumbnail:value.thumbnail_src, elements:arrBack});
                             yourDesigner.addProduct(arrProducts);
-                            console.log(arrProducts, "  £££");
 
                         });
+
+
                         //print button
                         $('#print-button').click(function(){
+                            //yourDesigner.clear();
+                            //yourDesigner.addView({title:'BACK TEST', thumbnail:'images/designs/heart_circle.png', elements:{}});
+                            yourDesigner.selectProduct(3);
+                            return;
                             yourDesigner.print();
                             return false;
                         });

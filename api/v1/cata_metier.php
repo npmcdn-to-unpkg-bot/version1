@@ -100,4 +100,16 @@ chromePHP::log($requete);
         }
         return $this->mapSqlToObject(mysqli_fetch_array($rs));
     }
+
+    public function findByMetier($key){
+        $requete = self::$SELECT . " WHERE ID_METIER=".$key;
+        $rs = $this->conn->query($requete);
+
+        $rows = [];
+        while($row = mysqli_fetch_array($rs))
+        {
+            $rows[] = $row;
+        }
+        return $rows;
+    }
 } 

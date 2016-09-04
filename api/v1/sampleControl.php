@@ -64,3 +64,47 @@ else if($mode == 2){
     $sample->save();
     print json_decode($data);
 }
+else if($mode == 3){
+    chromePHP::log("TEST:: " . $_GET["metier"]);
+    $cata_metier = new cata_metier();
+    $cata_metier = $cata_metier->findByMetier($_GET["metier"]);
+    chromePHP::log($cata_metier);
+    $arrIdCata = [];
+    foreach($cata_metier as $ligne){
+        $arrIdCata[] = $ligne["id_cata"];
+    }
+    chromePHP::log($arrIdCata);
+    $strCata = implode(",", $arrIdCata);
+    $cata  = new cata();
+    $cata = $cata->findAllByIdCataRange($strCata);
+
+    $arrData = [];
+    /*    foreach($sample as $ligne) {
+            $img_src = [];
+            $img_src[] =array('id'=>$ligne["id"], "src"=>$ligne["src"]);
+            $arrData[] = array('id'=>$ligne["id"], 'title'=>$ligne["description"], 'thumbnail_src'=>$ligne["src"], 'img_src'=>$img_src);
+        }
+    */
+    foreach($cata as $ligne) {
+        $img_src = [];
+        $arrFront = [];
+        $arrBack = [];
+        $arrElem = [];
+
+        $cata_ligne = new cata_ligne();
+        $cata_ligne = $cata_ligne->findByPrimaryKey($ligne["id_front"]);
+        $cata_ligne_params = new cata_ligne_params();
+        $cata_ligne_params = $cata_ligne_params->findByIdCata($cata_ligne->getId());
+        $arrFront = array('id'=>$cata_ligne->getId(), 'src'=>$cata_ligne->getSrc(), 'title'=>$cata_ligne->getTitle(), 'params' =>$cata_ligne_params);
+
+        $cata_back = $cata_ligne->findByPrimaryKey($ligne["id_back"]);
+        $cata_ligne_params1 = new cata_ligne_params();
+        $cata_ligne_params1 =  $cata_ligne_params1->findByIdCata($cata_back->getId());
+
+        $arrBack = array('id'=>$cata_back->getId(), 'src'=>$cata_back->getSrc(), 'title'=>$cata_back->getTitle(), 'params'=>$cata_ligne_params1);
+
+        $arrData[] = array('id'=>$ligne["id"], 'title'=>$ligne["libelle"], 'thumbnail_src'=>$ligne["src"], 'elemfront'=>$arrFront, 'elemback'=>$arrBack);
+    }
+    print json_encode($arrData);
+    return;
+}

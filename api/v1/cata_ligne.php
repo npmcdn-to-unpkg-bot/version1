@@ -102,7 +102,6 @@ class cata_ligne {
 
     public function findByPrimaryKey($key) { // Recherche d'une adresse par id
         $requete = self::$SELECT . " WHERE ID=" . $key;
-chromePHP::log($requete);
         $rs = $this->conn->query($requete);
 
         /*if ($rs->EOF) {
